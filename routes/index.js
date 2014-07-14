@@ -14,8 +14,9 @@ exports.index = function(req, res) {
 }
 
 exports.enter = function(req, res) {
-	console.log("enter page requested");
-	res.render('enter.html');
+	console.log("firstEmotion page requested");
+	// res.render('enter.html');
+	res.render('firstEmotion.html');
 }
 
 // /*

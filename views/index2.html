@@ -1,32 +1,42 @@
 <style>
 body {
-	font: sans-serif;
+	/*font: sans-serif;*/
 	background-color: black;
+	font: 2.1em sans-serif;
+	color: white;
+	letter-spacing: 1px;
+	font-weight: 100;
 }
-
 h3 {
 	letter-spacing: 1px;
 	color: white;
 	/*font-weight: 600 !important;*/
 	/*color: rgb(180,180,180);*/
 }
+.bg {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	opacity: 0.2;
+	z-index: -10;
+}
+p {
+	opacity: 1.0;
+}
 </style>
+<!-- <img class="bg" src="/img/ecode.png" > -->
 
-<br>
-<img src="/img/ecode.png"  width="160">
-<!-- <img src="/img/logo.jpeg"  width="130" height="130"> -->
 
-<br><br>
-<!-- <h3>Enter your emotion ID</h3> -->
-<input type="text" class="form-control">
-<br>
+<div style="position:relative; top:240px;">
+	<p>What is your <span style="font-weight:600;">emotion ID</span> ?</p>
 
-<!-- <button type="button" class="btn btn-default" onClick="location.href='enter' " >
-	Submit
-</button> -->
+	<input type="text" class="form-control">
+	<br>
 
-<a href="/enter">
-<button type="button" class="btn btn-default">
-	Submit
-</button>
-</a>
+	<a href="/enter">
+	<button type="button" class="btn btn-default">
+		Submit
+	</button>
+	</a>
+</div>
