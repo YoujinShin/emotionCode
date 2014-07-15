@@ -13,7 +13,7 @@ body {
     text-align:center;
     font-size:10px;
     color:#808080;
-    margin-top: 3px;
+    margin-top: 1px;
 }
 .emotion {
 	position: relative;
@@ -22,8 +22,15 @@ body {
 	color: white;
 	letter-spacing: 2px;
 }
+.emotionBG {
+	 border: 1px solid white;
+}
 h2 {
 	font: 2.1em sans-serif;
+}
+.submitD {
+	border-color: black;
+	color: black;
 }
 </style>
 
@@ -32,37 +39,55 @@ h2 {
 <div id = "legend" class="emotion" style="position:relative; top:20px">
 	<!-- <strong>Obese (%)</strong> -->
 	<nav class='legend clearfix '>
-	  <span style='background:#59a7d8;'>
+	  <span style='background:#59a7d8;' class="emotionBG">
 	  	<p class="emotion">SURPRISE</p>
 	  </span>
-	  <span style='background:#663ec7;'>
+	  <span style='background:#663ec7;' class="emotionBG">
 	  	<p class="emotion">SADNESS</p>
 	  </span>
-	  <span style='background:#62dcc7;'>
+	  <span style='background:#62dcc7;' class="emotionBG">
 	  	<p class="emotion">FEAR</p>
 	  </span>
-	  <span style='background:#ed462f;'>
+	  <span style='background:#ed462f;' class="emotionBG">
 	  	<p class="emotion">ANGER</p>
 	  </span>
-	  <span style='background:#b048be;'>
+	  <span style='background:#b048be;' class="emotionBG">
 	  	<p class="emotion">DISGUST</p>
 	  </span>
-	  <span style='background:#8ad698;'>
+	  <span style='background:#8ad698;' class="emotionBG">
 	  	<p class="emotion">SERENITY</p>
 	  </span>
-	  <span style='background:#ffed34;'>
+	  <span style='background:#ffed34;' class="emotionBG">
 	  	<p class="emotion">HAPPINESS</p>
 	  </span>
-	  <span style='background:#f49c31;'>
+	  <span style='background:#f49c31;' class="emotionBG">
 	  	<p class="emotion">FREEDOM</p>
 	  </span>
 	</nav>
 </div>
 
 <a href="/firstEmotionCode">
-	<button type="button" class="btn btn-default" style="position:relative; top: 50px;">
+	<button type="button" class="btn btn-default submitD" style="position:relative; top: 50px;">
 		Submit
 	</button>
 </a>
 
 <div style="padding:30px"></div>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+$( ".emotionBG" )
+  .on( "mouseenter", function() {
+    $( this ).css({
+      // "background-color": "yellow",
+      "opacity": "0.7",
+      "color" : "rgba(255,255,255,1)"
+    });
+  })
+  .on( "mouseleave", function() {
+    var styles = {
+      "opacity" : "1"
+    };
+    $( this ).css( styles );
+  });
+</script>
