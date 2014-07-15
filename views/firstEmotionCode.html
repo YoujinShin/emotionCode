@@ -1,0 +1,54 @@
+<style>
+	.radial {
+		/*fill: none;*/
+	}
+</style>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+
+<script>
+var margin = { top:20, right:20, bottom:20, left:20 };
+
+var width = 400,
+	width = width - margin.left - margin.right,
+	height = 400,
+	height = height - margin.top - margin.bottom;
+
+var theta = d3.scale.linear()
+			.range([0, Math.PI*2]);
+
+var svg = d3.select("body").append("svg")
+			.attr("width", width)
+			.attr("height", height);
+
+var bg = svg.append("rect")
+			.attr("x", -margin.left)
+			.attr("y", -margin.top)
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+			.style("fill", "blue");
+
+queue()
+  // .defer(d3.tsv, "test.tsv", function(d) {
+  // 	console.log(d);
+  // })
+  .defer(d3.tsv, "test.tsv")
+  .await(makeRadial);
+
+function makeRadial(error, data) {
+	console.log("makeRadial function");
+	// console.log(data);
+
+	var firstRadial = svg.selectAll(".radial")
+							.data(data)
+						.enter().append("line")
+						.attr("x1", function(d, i) { return i * 20; })
+						.attr("y1", 5)
+						.attr("x2", 50)
+						.attr("y2", 50)
+						.attr("stroke-width", 2)
+						.attr("stroke", "black");
+}
+
+</script>

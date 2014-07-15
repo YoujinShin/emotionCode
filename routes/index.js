@@ -13,11 +13,18 @@ exports.index = function(req, res) {
 	res.render('index2.html');
 }
 
-exports.enter = function(req, res) {
+exports.firstEmotion = function(req, res) {
 	console.log("firstEmotion page requested");
 	// res.render('enter.html');
 	res.render('firstEmotion.html');
 }
+
+exports.firstEmotionCode = function(req, res) {
+	console.log("firstEmotionCode page requested");
+	res.render("firstEmotionCode.html");
+}
+
+
 
 // /*
 // 	GET /

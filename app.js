@@ -52,7 +52,9 @@ app.configure('development', function(){
 var routes = require('./routes/index.js');
 
 app.get('/', routes.index);
-app.get('/enter', routes.enter);
+
+app.get('/firstEmotion', routes.firstEmotion);
+app.get('/firstEmotionCode', routes.firstEmotionCode);
 
 // //new astronaut routes
 // app.get('/create',routes.astroForm); //display form
