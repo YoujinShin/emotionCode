@@ -15,13 +15,22 @@ exports.index = function(req, res) {
 
 exports.firstEmotion = function(req, res) {
 	console.log("firstEmotion page requested");
-	// res.render('enter.html');
 	res.render('firstEmotion.html');
 }
 
 exports.firstEmotionCode = function(req, res) {
 	console.log("firstEmotionCode page requested");
 	res.render("firstEmotionCode.html");
+}
+
+exports.secondEmotion = function(req, res) {
+	console.log("secondEmotion page requested");
+	res.render('secondEmotion.html');
+}
+
+exports.secondEmotionCode = function(req, res) {
+	console.log("secondEmotionCode page requested");
+	res.render("secondEmotionCode.html");
 }
 
 
