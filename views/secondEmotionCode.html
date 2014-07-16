@@ -75,25 +75,65 @@ var tooltip = d3.select("body")
 
 queue()
   .defer(d3.tsv, "test.tsv")
+  .defer(d3.tsv, "test2.tsv")
   .await(makeRadial);
 
-function makeRadial(error, data) {
+function makeRadial(error, data, data2) {
 	console.log("makeRadial function");
 
 	var radius = width*0.38;
+	var tx = (width + margin.left + margin.right)/2;
+	var ty = (height + margin.top + margin.bottom)/2 - 20;
+
 	var firstRadial = svg.selectAll(".radial")
 							.data(data)
 						.enter().append("line")
-						.attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+						.attr("transform", "translate("+tx+","+ty+")");
 
 	firstRadial.attr("x1", function(d, i) { 
-			return Math.cos(i * Math.PI / 4) * radius; })
+			return Math.cos(i * Math.PI/4) * radius; })
 		.attr("y1", function(d, i) {
-			return Math.sin(i * Math.PI / 4) * radius; })
+			return Math.sin(i * Math.PI/4) * radius; })
 		.attr("x2", function(d, i) {
-			return Math.cos(i * Math.PI / 4) * radius *0.42; })
+			return Math.cos(i * Math.PI/4) * radius*0.42; })
 		.attr("y2", function(d, i) {
-			return Math.sin(i * Math.PI / 4) * radius *0.42; })
+			return Math.sin(i * Math.PI/4) * radius*0.42; })
+		.attr("stroke-width", 5)
+		.attr("stroke", function(d) {
+
+			if(d.selected === "1") {
+				return getColor(d.emotion);
+			} else {
+				return "rgba(235,235,235, 0.2)";
+			}
+		})
+		.on("mouseover", function(d){
+          tooltip.text(d.emotion );
+          d3.select(this).style("stroke-width", 12);
+          tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){
+          tooltip.style("top", (event.pageY-10)+"px")
+          		 .style("left",(event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+          d3.select(this).style("stroke-width", 5);
+          tooltip.style("visibility", "hidden"); 
+      	});
+
+    var secondRadial = svg.selectAll(".radial")
+							.data(data2)
+						.enter().append("line")
+						.attr("transform", "translate("+tx+","+ty+")");
+
+	secondRadial.attr("x1", function(d, i) { 
+			return Math.cos(i * Math.PI/4 + Math.PI/8) * radius; })
+		.attr("y1", function(d, i) {
+			return Math.sin(i * Math.PI/4 + Math.PI/8) * radius; })
+		.attr("x2", function(d, i) {
+			return Math.cos(i * Math.PI/4 + Math.PI/8) * radius*0.42; })
+		.attr("y2", function(d, i) {
+			return Math.sin(i * Math.PI/4 + Math.PI/8) * radius*0.42; })
 		.attr("stroke-width", 5)
 		.attr("stroke", function(d) {
 
