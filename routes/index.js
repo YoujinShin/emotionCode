@@ -33,6 +33,10 @@ exports.secondEmotionCode = function(req, res) {
 	res.render("secondEmotionCode.html");
 }
 
+exports.view = function(req, res) {
+	console.log("view page requested");
+	res.render("viewEmotionCode.html");
+}
 
 
 // /*

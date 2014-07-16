@@ -59,6 +59,8 @@ app.get('/firstEmotionCode', routes.firstEmotionCode);
 app.get('/secondEmotion', routes.secondEmotion);
 app.get('/secondEmotionCode', routes.secondEmotionCode);
 
+app.get('/view', routes.view);
+
 // //new astronaut routes
 // app.get('/create',routes.astroForm); //display form
 // app.post('/create',routes.createAstro); //form POST submits here
