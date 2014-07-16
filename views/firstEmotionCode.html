@@ -81,10 +81,13 @@ function makeRadial(error, data) {
 	console.log("makeRadial function");
 
 	var radius = width*0.38;
+	var tx = (width + margin.left + margin.right)/2;
+	var ty = (height + margin.top + margin.bottom)/2 - 20;
+
 	var firstRadial = svg.selectAll(".radial")
 							.data(data)
 						.enter().append("line")
-						.attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+						.attr("transform", "translate("+tx+","+ty+ ")");
 
 	firstRadial.attr("x1", function(d, i) { 
 			return Math.cos(i * Math.PI / 4) * radius; })
