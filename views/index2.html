@@ -33,13 +33,24 @@ a, a:hover {
 </style>
 <!-- <img class="bg" src="/img/ecode.png" > -->
 
-<div style="position:relative; top:140px;">
+<form method="POST" action="/firstEmotion" role="form" style="position:relative; top:140px;">
+	
 	<p>What is your <span style="font-weight:bold; ">emotion ID</span> ?</p>
-
-	<input type="text" class="form-control">
+	<input type="text" class="form-control" name="id">
 	<br>
 
-	<a href="/firstEmotion">
+	<button type="submit" class="btn btn-default" style="background-color:black !important;" >
+		Crack your emotion
+	</button>
+</form>
+
+<!-- <div style="position:relative; top:140px;">
+	<p>What is your <span style="font-weight:bold; ">emotion ID</span> ?</p>
+
+	<input type="text" class="form-control" id="name">
+	<br>
+
+	<a href="/createFirstEmotion">
 	<button type="button" class="btn btn-default" style="background-color:black !important;" >
 		Primary
 	</button>
@@ -56,10 +67,4 @@ a, a:hover {
 		Emotion Code
 	</button>
 	</a>
-
-<!-- 	<a href="/enter">
-	<button type="button" class="btn btn-default" style="font-size:1.2em">
-		Submit
-	</button> -->
-</a>
-</div>
+</div> -->

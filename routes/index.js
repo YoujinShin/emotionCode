@@ -6,7 +6,8 @@
 var request = require('request'); // library to make requests to remote urls
 
 var moment = require("moment"); // date manipulation library
-var astronautModel = require("../models/astronaut.js"); //db model
+// var astronautModel = require("../models/astronaut.js"); //db model
+var emotionModel = require("../models/emotion.js");
 
 exports.index = function(req, res) {
 	console.log("main page requested");
@@ -15,7 +16,63 @@ exports.index = function(req, res) {
 
 exports.firstEmotion = function(req, res) {
 	console.log("firstEmotion page requested");
-	res.render('firstEmotion.html');
+	console.log(req.body);
+
+	if(req.body.id == 'test') {
+		console.log("render firstEmotion");
+		res.render('firstEmotion.html');
+	} else {
+		console.log("wrong name");
+	}
+}
+
+// exports.checkStatus = function(req, res) {
+// 	console.log("checkStatus requested");
+// 	if(req.body.name == "test") {
+// 		console.log("render firstEmotion");
+// 		res.render('firstEmotion.html');
+// 	} else {
+// 		console.log("wrong name");
+// 	}
+// }
+
+exports.createFirstEmotion = function(req, res) {
+	console.log("createFirstEmotion requested");
+	console.log(req.body);
+	var date = moment(this.date), formatted = date.format('YY[-]MM[-]DD[_]HH[:]mm[:]ss[_]');
+ 
+	var newEmotion = new emotionModel({
+		// slug : formatted + req.body.id.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
+		// name : req.body.id,
+		// state : '0',
+		properties : {
+			state : '0',
+			surprise : req.body.surprise,
+			sadness : req.body.sadness,
+			fear : req.body.fear,
+			anger : req.body.anger,
+			disgust : req.body.disgust,
+			serenity : req.body.serenity,
+			happiness : req.body.happiness,
+			freedom : req.body.freedom
+		}
+	});
+
+	console.log(newEmotion);
+
+	// newEmotion.save(function(err){
+	// 	if (err) {
+	// 		console.error("Error on saving new emotion data");
+	// 		console.error(err); // log out to Terminal all errors
+	// 		// res.render('water_form.html', templateData);
+	// 		// return res.send("There was an error when creating a new astronaut");
+	// 	} else {
+	// 		console.log("Created a new emotion!");
+	// 		console.log(newEmotion);
+	// 		// res.redirect('/quality/'+ newEmotion.slug);
+	// 		// res.redirect('/password_err');
+	// 	}
+	// });
 }
 
 exports.firstEmotionCode = function(req, res) {

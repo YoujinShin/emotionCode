@@ -3,14 +3,16 @@ var Schema = mongoose.Schema;
 
 var EmotionSchema = new Schema({
 	slug : { type: String, lowercase: true, required: true, unique: true },
-	type : { type: String },
+	name : String,
 	properties : {
-		reference : String,
-		testdate : String,
-		sourcetype: String,
-		colilert: String,
-		petrifilm_blue: String,
-		petrifilm_red: String
+		surprise : String,
+		sadness : String,
+		fear: String,
+		anger: String,
+		disgust: String,
+		serenity: String,
+		happiness: String,
+		freedom: String
 		// petrifilm_red: Number
 	}
 });

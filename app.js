@@ -52,9 +52,11 @@ app.configure('development', function(){
 var routes = require('./routes/index.js');
 
 app.get('/', routes.index);
+// app.post('/checkStatus', routes.checkStatus);
 
-app.get('/firstEmotion', routes.firstEmotion);
-app.get('/firstEmotionCode', routes.firstEmotionCode);
+app.post('/firstEmotion', routes.firstEmotion);
+app.post('/createFirstEmotion', routes.createFirstEmotion);
+app.post('/firstEmotionCode', routes.firstEmotionCode);
 
 app.get('/secondEmotion', routes.secondEmotion);
 app.get('/secondEmotionCode', routes.secondEmotionCode);
