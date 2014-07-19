@@ -52,16 +52,17 @@ app.configure('development', function(){
 var routes = require('./routes/index.js');
 
 app.get('/', routes.index);
-// app.post('/checkStatus', routes.checkStatus);
 
 app.post('/firstEmotion', routes.firstEmotion);
 app.post('/createFirstEmotion', routes.createFirstEmotion);
-app.post('/firstEmotionCode', routes.firstEmotionCode);
 
 app.get('/secondEmotion', routes.secondEmotion);
 app.get('/secondEmotionCode', routes.secondEmotionCode);
 
 app.get('/view', routes.view);
+
+app.get('/allEmotion', routes.allEmotion);
+app.get('/primaryCode/:emotion_id', routes.primaryCode);
 
 // //new astronaut routes
 // app.get('/create',routes.astroForm); //display form

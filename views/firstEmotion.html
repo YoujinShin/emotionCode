@@ -39,86 +39,62 @@ h2 {
 input[type=checkbox] {
 	visibility: hidden;
 }
-
 </style>
  <!-- <link rel="stylesheet" href="/css/checkDesign.css"> -->
 
 <h2>What emotion<span style="font-weight:bold"> inspires </span>your work?</h2>
 
+<!-- {{name}} -->
+<!-- <input type="text" name="name" value="yes" id="name"> -->
 
 <form method="POST" action="/createFirstEmotion" role="form" style="position:relative; top:0px;">
-<!-- Examples -->
-<!-- 	
-<input type="checkbox" value="None" id="squaredOne" name="surprise" />
-	<label for="squaredOne">
-	</label>
--->
-
-<!-- 
-<label>
-	<input type="checkbox" name="testtype_p" id="testtype_p" value="petrifilm_test">
-	<img src="/img/petrifilm.png" style="width:76px; opacity:0.9; padding:4px;" class="img-rounded"/>
-	Petrifilm
-</label> 
--->
-<!-- Examples -->
-
+		<input type="text" name="name" value={{name}} id="name" style="display:none">
+		<input type="text" name="state" value="primary" id="state" style="display:none">
 
 		<nav class='legend clearfix '>
 		  	<label class="emotionBG" id="surpriseC">
 		  			<p class="emotion">SURPRISE</p>
-			  		<input type="checkbox" name="surprise" value="yes" id="surprise">
+			  		<input type="checkbox" name="surprise"  value="1" id="surprise">
+			  		
 			</label>
 
 			<label class="emotionBG" id="sadnessC">
 		  			<p class="emotion">SADNESS</p>
-			  		<input type="checkbox" name="sadness" value="yes" id="sadness">
+			  		<input type="checkbox" name="sadness" value="1" id="sadness">
 			</label>
 
 			<label class="emotionBG" id="fearC">
 		  			<p class="emotion">FEAR</p>
-			  		<input type="checkbox" name="fear" value="yes" id="fear">
+			  		<input type="checkbox" name="fear" value="1" id="fear">
 			</label>
 
 			<label class="emotionBG" id="angerC">
 		  			<p class="emotion">ANGER</p>
-			  		<input type="checkbox" name="anger" value="yes" id="anger">
+			  		<input type="checkbox" name="anger" value="1" id="anger">
 			</label>
 
 			<label class="emotionBG" id="disgustC">
 		  			<p class="emotion">DISGUST</p>
-			  		<input type="checkbox" name="disgust" value="yes" id="disgust">
+			  		<input type="checkbox" name="disgust" value="1" id="disgust">
 			</label>
 
 			<label class="emotionBG" id="serenityC">
 		  			<p class="emotion">SERENITY</p>
-			  		<input type="checkbox" name="serenity" value="yes" id="serenity">
+			  		<input type="checkbox" name="serenity" value="1" id="serenity">
 			</label>
 
 			<label class="emotionBG" id="happinessC">
 		  			<p class="emotion">HAPPINESS</p>
-			  		<input type="checkbox" name="happiness" value="yes" id="happiness">
+			  		<input type="checkbox" name="happiness" value="1" id="happiness">
 			</label>
 
 			<label class="emotionBG" id="freedomC">
 		  			<p class="emotion">FREEDOM</p>
-			  		<input type="checkbox" name="freedom" value="yes" id="freedom">
+			  		<input type="checkbox" name="freedom" value="1" id="freedom">
 			</label>
-
-
-
-			<!-- original code -->
-
-<!-- 		  <span class="emotionBG" name="happiness" id="happiness" value="-1">
-		  	<p class="emotion">HAPPINESS</p>
-		  </span> -->
-<!-- 		  <span class="emotionBG" name="freedom" id="freedom" value="-1">
-		  	<p class="emotion">FREEDOM</p>
-		  </span>
- -->
 		</nav>
 	</div>
-	<!-- <input type="text" class="form-control" name="surprise" value="-1"> -->
+
 	<br><br><br>
 	<button type="submit" class="btn btn-default">
 		Submit
@@ -127,18 +103,22 @@ input[type=checkbox] {
 
 
 <div style="padding:20px"></div>
-
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 var c = "rgb(170,170,170)";
 
+// if(document.getElementById("surprise").checked){
+//   document.getElementById('surpriseHidden').disabled = true;
+// }
+
+///////////////////////////////
 var surprise_clicked = -1;
 $( "#surprise" )
   .on( "click", function() {
   	surprise_clicked = surprise_clicked * (-1);
   	console.log("surprise_clicked: "+ surprise_clicked);
-  	if(surprise_clicked === 1 ) { $( "#surpriseC"  ).css({ "background-color": "#59a7d8"}); };
-	if(surprise_clicked === -1) { $( "#surpriseC"  ).css({ "background-color": c}); }
+  	if(surprise_clicked === 1 ) {  $( "#surpriseC"  ).css({ "background-color": "#59a7d8"}); };
+	if(surprise_clicked === -1) {  $( "#surpriseC"  ).css({ "background-color": c}); }
   });
 
 var sadness_clicked = -1;

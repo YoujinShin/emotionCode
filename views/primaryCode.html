@@ -1,6 +1,5 @@
 <style>
 	body {
-		/*padding: 0px !important;*/
 		font: 1.2em sans-serif !important;
 		letter-spacing: 1px !important;
 		background: black;
@@ -73,11 +72,55 @@ var tooltip = d3.select("body")
 	.style("visibility", "hidden");
 	// .attr("id", "tooltip");
 
-queue()
-  .defer(d3.tsv, "test.tsv")
-  .await(makeRadial);
+var data = [
+{	
+	"emotion": "surprise",
+	"selected": {{ emotion.properties.surprise }}
+}, {
+	"emotion": "sadness",
+	"selected": {{ emotion.properties.sadness }}
+}, {
+	"emotion": "fear",
+	"selected": {{ emotion.properties.fear }}
+}, {
+	"emotion": "anger",
+	"selected": {{ emotion.properties.anger }}
+}, {
+	"emotion": "disgust",
+	"selected": {{ emotion.properties.disgust }}
+}, {
+	"emotion": "serenity",
+	"selected": {{ emotion.properties.serenity }}
+}, {
+	"emotion": "happiness",
+	"selected": {{ emotion.properties.happiness }}
+}, {
+	"emotion": "freedom",
+	"selected": {{ emotion.properties.freedom }}
+}];
 
-function makeRadial(error, data) {
+// 1var jsonCircles = [
+//  2  {
+//  3   "x_axis": 30,
+//  4   "y_axis": 30,
+//  5   "radius": 20,
+//  6   "color" : "green"
+//  7  }, {
+//  8   "x_axis": 70,
+//  9   "y_axis": 70,
+// 10   "radius": 20,
+// 11   "color" : "purple"
+// 12  }, {
+// 13   "x_axis": 110,
+// 14   "y_axis": 100,
+// 15   "radius": 20,
+// 16   "color" : "red"
+// 17}];
+
+console.log(data);
+makeRadial();
+
+function makeRadial() {
 	console.log("makeRadial function");
 
 	var radius = width*0.38;
@@ -90,17 +133,18 @@ function makeRadial(error, data) {
 						.attr("transform", "translate("+tx+","+ty+ ")");
 
 	firstRadial.attr("x1", function(d, i) { 
+			console.log(d);
 			return Math.cos(i * Math.PI / 4) * radius; })
 		.attr("y1", function(d, i) {
 			return Math.sin(i * Math.PI / 4) * radius; })
 		.attr("x2", function(d, i) {
-			return Math.cos(i * Math.PI / 4) * radius *0.42; })
+			return Math.cos(i * Math.PI / 4) * radius *0; })
 		.attr("y2", function(d, i) {
-			return Math.sin(i * Math.PI / 4) * radius *0.42; })
+			return Math.sin(i * Math.PI / 4) * radius *0; })
 		.attr("stroke-width", 5)
 		.attr("stroke", function(d) {
 
-			if(d.selected === "1") {
+			if(d.selected === 1) {
 				return getColor(d.emotion);
 			} else {
 				return "rgba(235,235,235, 0.2)";
@@ -122,16 +166,15 @@ function makeRadial(error, data) {
 }
 
 function getColor(d) {
-	if(d === "Surprise") { return "#59a7d8"; }
-	else if(d === "Sadness") { return "#663ec7"; } 
-	else if(d === "Fear") { return "#62dcc7"; } 
-	else if(d === "Anger") { return "#ed462f"; } 
-	else if(d === "Disgust") { return "#b048be"; } 
-	else if(d === "Serenity") { return "#8ad698"; } 
-	else if(d === "Happiness") { return "#ffed34"; } 
-	else if(d === "Freedom") { return "#f49c31"; }
+	if(d === "surprise") { return "#59a7d8"; }
+	else if(d === "sadness") { return "#663ec7"; } 
+	else if(d === "fear") { return "#62dcc7"; } 
+	else if(d === "anger") { return "#ed462f"; } 
+	else if(d === "disgust") { return "#b048be"; } 
+	else if(d === "serenity") { return "#8ad698"; } 
+	else if(d === "happiness") { return "#ffed34"; } 
+	else if(d === "freedom") { return "#f49c31"; }
 }
 
 </script>
-
 

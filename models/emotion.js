@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var EmotionSchema = new Schema({
 	slug : { type: String, lowercase: true, required: true, unique: true },
 	name : String,
+	state : String,
 	properties : {
 		surprise : String,
 		sadness : String,

@@ -4,10 +4,8 @@
  */
 
 var request = require('request'); // library to make requests to remote urls
-
 var moment = require("moment"); // date manipulation library
-// var astronautModel = require("../models/astronaut.js"); //db model
-var emotionModel = require("../models/emotion.js");
+var emotionModel = require("../models/emotion.js"); //db model
 
 exports.index = function(req, res) {
 	console.log("main page requested");
@@ -16,68 +14,84 @@ exports.index = function(req, res) {
 
 exports.firstEmotion = function(req, res) {
 	console.log("firstEmotion page requested");
-	console.log(req.body);
 
-	if(req.body.id == 'test') {
+	if(req.body.name !== null) {
+		var templateData = {
+			name : req.body.name
+		}
+
 		console.log("render firstEmotion");
-		res.render('firstEmotion.html');
+		res.render('firstEmotion.html', templateData);
 	} else {
 		console.log("wrong name");
 	}
 }
 
-// exports.checkStatus = function(req, res) {
-// 	console.log("checkStatus requested");
-// 	if(req.body.name == "test") {
-// 		console.log("render firstEmotion");
-// 		res.render('firstEmotion.html');
-// 	} else {
-// 		console.log("wrong name");
-// 	}
-// }
-
 exports.createFirstEmotion = function(req, res) {
 	console.log("createFirstEmotion requested");
-	console.log(req.body);
 	var date = moment(this.date), formatted = date.format('YY[-]MM[-]DD[_]HH[:]mm[:]ss[_]');
+
+	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, happinessV, freedomV;
+	if( req.body.surprise == null) { surpriseV = 0;} else { surpriseV = 1 ;}
+	if( req.body.sadness == null) {  sadnessV = 0;} else { sadnessV = 1 ;}
+	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
+	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
+	if( req.body.disgust == null) {  disgustV = 0;} else { disgustV = 1 ;}
+	if( req.body.serenity == null) {  serenityV = 0;} else { serenityV = 1 ;}
+	if( req.body.happiness == null) {  happinessV = 0;} else { happinessV = 1 ;}
+	if( req.body.freedom == null) {  freedomV = 0;} else { freedomV = 1 ;}
  
 	var newEmotion = new emotionModel({
-		// slug : formatted + req.body.id.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
-		// name : req.body.id,
-		// state : '0',
+		slug : formatted + req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
+		name : req.body.name,
+		state : req.body.state,
 		properties : {
-			state : '0',
-			surprise : req.body.surprise,
-			sadness : req.body.sadness,
-			fear : req.body.fear,
-			anger : req.body.anger,
-			disgust : req.body.disgust,
-			serenity : req.body.serenity,
-			happiness : req.body.happiness,
-			freedom : req.body.freedom
+			surprise : surpriseV,
+			sadness : sadnessV,
+			fear : fearV,
+			anger : angerV,
+			disgust : disgustV,
+			serenity : serenityV,
+			happiness : happinessV,
+			freedom : freedomV
 		}
 	});
 
-	console.log(newEmotion);
-
-	// newEmotion.save(function(err){
-	// 	if (err) {
-	// 		console.error("Error on saving new emotion data");
-	// 		console.error(err); // log out to Terminal all errors
-	// 		// res.render('water_form.html', templateData);
-	// 		// return res.send("There was an error when creating a new astronaut");
-	// 	} else {
-	// 		console.log("Created a new emotion!");
-	// 		console.log(newEmotion);
-	// 		// res.redirect('/quality/'+ newEmotion.slug);
-	// 		// res.redirect('/password_err');
-	// 	}
-	// });
+	newEmotion.save(function(err){
+		if (err) {
+			console.error("Error on saving new emotion data");
+			console.error(err); // log out to Terminal all errors
+			// res.render('water_form.html', templateData);
+			// return res.send("There was an error when creating a new astronaut");
+		} else {
+			console.log("Created a new emotion!");
+			console.log(newEmotion);
+			// res.render("firstEmotionCode.html", newEmotion);
+			res.redirect('/primaryCode/' + newEmotion.slug);
+		}
+	});
 }
 
-exports.firstEmotionCode = function(req, res) {
-	console.log("firstEmotionCode page requested");
-	res.render("firstEmotionCode.html");
+exports.primaryCode = function(req, res) {
+	console.log("primaryCode page requested for " + req.params.emotion_id);
+	var emotion_id = req.params.emotion_id; 
+	var emotionQuery = emotionModel.findOne({slug:emotion_id}); 
+	
+	emotionQuery.exec(function(err, currentEmotion){
+		if (err) {
+			return res.status(500).send("There was an error on the quality query");
+		}
+		if (currentEmotion == null) {
+			return res.status(404).render('404.html');
+		}
+		console.log("Found emotion");
+		console.log(currentEmotion);
+
+		var templateData = {
+			emotion : currentEmotion
+		}
+		res.render('primaryCode.html', templateData);
+	});
 }
 
 exports.secondEmotion = function(req, res) {
@@ -93,6 +107,20 @@ exports.secondEmotionCode = function(req, res) {
 exports.view = function(req, res) {
 	console.log("view page requested");
 	res.render("viewEmotionCode.html");
+}
+
+exports.allEmotion = function(req, res) { 
+	console.log("all emotion data retrieved");
+	emotionQuery = emotionModel.find({}); // query for all emotion
+
+	emotionQuery.exec(function(err, allEmotion){
+		// prepare data for JSON
+		var jsonData = {
+			status : 'OK',
+			quality : allEmotion
+		}
+		res.json(jsonData);
+	});
 }
 
 
