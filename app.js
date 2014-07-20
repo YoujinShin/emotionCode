@@ -67,7 +67,6 @@ app.get('/aspirationalCode/:emotion_id', routes.aspirationalCode);
 // app.get('/secondEmotionCode', routes.secondEmotionCode);
 
 app.get('/view', routes.view);
-
 app.get('/allEmotion', routes.allEmotion);
 
 

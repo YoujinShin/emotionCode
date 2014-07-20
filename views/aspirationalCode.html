@@ -1,1 +1,225 @@
-hi
+<style>
+	body {
+		/*padding: 0px !important;*/
+		font: 1.2em sans-serif !important;
+		letter-spacing: 1px !important;
+		background: black;
+	}
+	.radial {
+		fill: none;
+	}
+	#firstEG {
+		width: 100%;
+	}
+	p {
+		font: 1.6em sans-serif !important;
+		color: white;
+		line-height:140% !important;
+	}
+	.btn-default{
+		background-color: black !important;
+		color: white !important;
+		background-image: none !important;
+		border-bottom-color: none !important;
+		border-color: white !important;
+	}
+</style>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+
+<div id="firstEG"></div>
+
+<p>Congrats on your final <span style="font-weight:bold; ">emotion code</span> !</p>
+
+<br>
+<a href="/">
+	<button type="button" class="btn btn-default" style="background-color:black !important;" >
+		Go to the first page
+	</button>
+	</a>
+
+<script>
+
+var width = parseInt(d3.select('#firstEG').style('width'), 10),
+	height = width*1.1;
+
+var margin = { top: 20, right:20, bottom:30, left:20};
+
+width = width - margin.left - margin.right,
+height = height - margin.top - margin.bottom;
+
+var theta = d3.scale.linear()
+			.range([0, Math.PI*2]);
+
+var svg = d3.select("#firstEG").append("svg")
+			.attr("width", width)
+			.attr("height", height);
+
+var bg = svg.append("rect")
+			.attr("x", -margin.left)
+			.attr("y", -margin.top)
+			.attr("width", width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
+			.style("fill", "none");
+
+var tooltip = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("padding", "8px")
+	.style("color", "white")
+	// .style("background-color", "rgba(0,0,0,0.6)")
+	.style("visibility", "hidden");
+	// .attr("id", "tooltip");
+
+var data = [
+{	
+	"emotion": "surprise",
+	"selected": {{ emotion.first.surprise }}
+}, {
+	"emotion": "sadness",
+	"selected": {{ emotion.first.sadness }}
+}, {
+	"emotion": "fear",
+	"selected": {{ emotion.first.fear }}
+}, {
+	"emotion": "anger",
+	"selected": {{ emotion.first.anger }}
+}, {
+	"emotion": "disgust",
+	"selected": {{ emotion.first.disgust }}
+}, {
+	"emotion": "serenity",
+	"selected": {{ emotion.first.serenity }}
+}, {
+	"emotion": "happiness",
+	"selected": {{ emotion.first.happiness }}
+}, {
+	"emotion": "freedom",
+	"selected": {{ emotion.first.freedom }}
+}];
+// console.log(data);
+
+var data2 = [
+{	
+	"emotion": "surprise",
+	"selected": {{ emotion.second.surprise }}
+}, {
+	"emotion": "sadness",
+	"selected": {{ emotion.second.sadness }}
+}, {
+	"emotion": "fear",
+	"selected": {{ emotion.second.fear }}
+}, {
+	"emotion": "anger",
+	"selected": {{ emotion.second.anger }}
+}, {
+	"emotion": "disgust",
+	"selected": {{ emotion.second.disgust }}
+}, {
+	"emotion": "serenity",
+	"selected": {{ emotion.second.serenity }}
+}, {
+	"emotion": "happiness",
+	"selected": {{ emotion.second.happiness }}
+}, {
+	"emotion": "freedom",
+	"selected": {{ emotion.second.freedom }}
+}];
+
+makeRadial();
+
+function makeRadial() {
+	console.log("makeRadial function");
+
+	var radius = width*0.38;
+	var tx = (width + margin.left + margin.right)/2;
+	var ty = (height + margin.top + margin.bottom)/2 - 20;
+
+	var firstRadial = svg.selectAll(".radial")
+							.data(data)
+						.enter().append("line")
+						.attr("transform", "translate("+tx+","+ty+")");
+
+	firstRadial.attr("x1", function(d, i) { 
+			return Math.cos(i * Math.PI/4) * radius*0.6; })
+		.attr("y1", function(d, i) {
+			return Math.sin(i * Math.PI/4) * radius*0.6; })
+		.attr("x2", function(d, i) {
+			return Math.cos(i * Math.PI/4) * radius*0.06; })
+		.attr("y2", function(d, i) {
+			return Math.sin(i * Math.PI/4) * radius*0.06; })
+		.attr("stroke-width", 4)
+		.attr("stroke", function(d) {
+
+			if(d.selected === 1) {
+				return getColor(d.emotion);
+			} else {
+				return "rgba(235,235,235, 0.2)";
+			}
+		})
+		.on("mouseover", function(d){
+          tooltip.text(d.emotion );
+          d3.select(this).style("stroke-width", 12);
+          tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){
+          tooltip.style("top", (event.pageY-10)+"px")
+          		 .style("left",(event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+          d3.select(this).style("stroke-width", 4);
+          tooltip.style("visibility", "hidden"); 
+      	});
+
+    var secondRadial = svg.selectAll(".radial")
+							.data(data2)
+						.enter().append("line")
+						.attr("transform", "translate("+tx+","+ty+")");
+
+	secondRadial.attr("x1", function(d, i) { 
+			return Math.cos(i * Math.PI/4 + Math.PI/8) * radius; })
+		.attr("y1", function(d, i) {
+			return Math.sin(i * Math.PI/4 + Math.PI/8) * radius; })
+		.attr("x2", function(d, i) {
+			return Math.cos(i * Math.PI/4 + Math.PI/8) * radius*0.06; })
+		.attr("y2", function(d, i) {
+			return Math.sin(i * Math.PI/4 + Math.PI/8) * radius*0.06; })
+		.attr("stroke-width", 4)
+		.attr("stroke", function(d) {
+			if(d.selected === 1) {
+				return getColor(d.emotion);
+			} else {
+				return "rgba(235,235,235, 0.2)";
+			}
+		})
+		.on("mouseover", function(d){
+          tooltip.text(d.emotion );
+          d3.select(this).style("stroke-width", 12);
+          tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){
+          tooltip.style("top", (event.pageY-10)+"px")
+          		 .style("left",(event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+          d3.select(this).style("stroke-width", 4);
+          tooltip.style("visibility", "hidden"); 
+      	});
+}
+
+function getColor(d) {
+	if(d === "surprise") { return "#59a7d8"; }
+	else if(d === "sadness") { return "#663ec7"; } 
+	else if(d === "fear") { return "#62dcc7"; } 
+	else if(d === "anger") { return "#ed462f"; } 
+	else if(d === "disgust") { return "#b048be"; } 
+	else if(d === "serenity") { return "#8ad698"; } 
+	else if(d === "happiness") { return "#ffed34"; } 
+	else if(d === "freedom") { return "#f49c31"; }
+}
+
+</script>
+
+
