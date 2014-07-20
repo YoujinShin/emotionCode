@@ -1,11 +1,28 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+// var EmotionSchema = new Schema({
+// 	slug : { type: String, lowercase: true, required: true, unique: true },
+// 	name : String,
+// 	state : String,
+// 	properties : {
+// 		surprise : String,
+// 		sadness : String,
+// 		fear: String,
+// 		anger: String,
+// 		disgust: String,
+// 		serenity: String,
+// 		happiness: String,
+// 		freedom: String
+// 		// petrifilm_red: Number
+// 	}
+// });
+
 var EmotionSchema = new Schema({
 	slug : { type: String, lowercase: true, required: true, unique: true },
 	name : String,
 	state : String,
-	properties : {
+	first : {
 		surprise : String,
 		sadness : String,
 		fear: String,
@@ -14,7 +31,16 @@ var EmotionSchema = new Schema({
 		serenity: String,
 		happiness: String,
 		freedom: String
-		// petrifilm_red: Number
+	},
+	second : {
+		surprise : String,
+		sadness : String,
+		fear: String,
+		anger: String,
+		disgust: String,
+		serenity: String,
+		happiness: String,
+		freedom: String
 	}
 });
 

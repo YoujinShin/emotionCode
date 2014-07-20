@@ -29,17 +29,25 @@
 
 <div id="firstEG"></div>
 
-<p>Congrats on your first <span style="font-weight:bold; ">emotion code</span> !</p>
+<!-- <form method="POST" action="/forsecondEmotion" role="form" style="position:relative; top:16px;">
+	<p>Your primary <span style="font-weight:bold; ">emotion code</span></p>
+	<input type="hidden" name="slug"  value={{ emotion.slug }} id="name">
 
-<br>
+	<button type="submit" class="btn btn-default" style="background-color:black !important;" >
+		Crack your aspirational emotion
+	</button>
+</form> -->
+
+
+<p>Your primary <span style="font-weight:bold; ">emotion code</span></p><br>
 <a href="/">
 	<button type="button" class="btn btn-default" style="background-color:black !important;" >
 		Go to the first page
 	</button>
-	</a>
+</a>
+
 
 <script>
-
 var width = parseInt(d3.select('#firstEG').style('width'), 10),
 	height = width*1.1;
 
@@ -75,53 +83,36 @@ var tooltip = d3.select("body")
 var data = [
 {	
 	"emotion": "surprise",
-	"selected": {{ emotion.properties.surprise }}
+	"selected": {{ emotion.first.surprise }}
 }, {
 	"emotion": "sadness",
-	"selected": {{ emotion.properties.sadness }}
+	"selected": {{ emotion.first.sadness }}
 }, {
 	"emotion": "fear",
-	"selected": {{ emotion.properties.fear }}
+	"selected": {{ emotion.first.fear }}
 }, {
 	"emotion": "anger",
-	"selected": {{ emotion.properties.anger }}
+	"selected": {{ emotion.first.anger }}
 }, {
 	"emotion": "disgust",
-	"selected": {{ emotion.properties.disgust }}
+	"selected": {{ emotion.first.disgust }}
 }, {
 	"emotion": "serenity",
-	"selected": {{ emotion.properties.serenity }}
+	"selected": {{ emotion.first.serenity }}
 }, {
 	"emotion": "happiness",
-	"selected": {{ emotion.properties.happiness }}
+	"selected": {{ emotion.first.happiness }}
 }, {
 	"emotion": "freedom",
-	"selected": {{ emotion.properties.freedom }}
+	"selected": {{ emotion.first.freedom }}
 }];
-
-// 1var jsonCircles = [
-//  2  {
-//  3   "x_axis": 30,
-//  4   "y_axis": 30,
-//  5   "radius": 20,
-//  6   "color" : "green"
-//  7  }, {
-//  8   "x_axis": 70,
-//  9   "y_axis": 70,
-// 10   "radius": 20,
-// 11   "color" : "purple"
-// 12  }, {
-// 13   "x_axis": 110,
-// 14   "y_axis": 100,
-// 15   "radius": 20,
-// 16   "color" : "red"
-// 17}];
 
 console.log(data);
 makeRadial();
 
 function makeRadial() {
 	console.log("makeRadial function");
+	// console.log(document.getElementById('name').value);
 
 	var radius = width*0.38;
 	var tx = (width + margin.left + margin.right)/2;
@@ -138,12 +129,11 @@ function makeRadial() {
 		.attr("y1", function(d, i) {
 			return Math.sin(i * Math.PI / 4) * radius; })
 		.attr("x2", function(d, i) {
-			return Math.cos(i * Math.PI / 4) * radius *0; })
+			return Math.cos(i * Math.PI / 4) * radius *0.06; })
 		.attr("y2", function(d, i) {
-			return Math.sin(i * Math.PI / 4) * radius *0; })
+			return Math.sin(i * Math.PI / 4) * radius *0.06; })
 		.attr("stroke-width", 5)
 		.attr("stroke", function(d) {
-
 			if(d.selected === 1) {
 				return getColor(d.emotion);
 			} else {
@@ -177,4 +167,3 @@ function getColor(d) {
 }
 
 </script>
-

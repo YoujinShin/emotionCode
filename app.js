@@ -52,17 +52,24 @@ app.configure('development', function(){
 var routes = require('./routes/index.js');
 
 app.get('/', routes.index);
+app.post('/checkState', routes.checkState);
 
 app.post('/firstEmotion', routes.firstEmotion);
 app.post('/createFirstEmotion', routes.createFirstEmotion);
+app.get('/primaryCode/:emotion_id', routes.primaryCode);
 
-app.get('/secondEmotion', routes.secondEmotion);
-app.get('/secondEmotionCode', routes.secondEmotionCode);
+app.get('/secondEmotion/:emotion_id', routes.secondEmotion);
+app.post('/createSecondEmotion', routes.createSecondEmotion);
+app.get('/aspirationalCode/:emotion_id', routes.aspirationalCode);
+
+// app.post('/forsecondEmotion', routes.secondEmotion);
+// app.get('/secondEmotion', routes.secondEmotion);
+// app.get('/secondEmotionCode', routes.secondEmotionCode);
 
 app.get('/view', routes.view);
 
 app.get('/allEmotion', routes.allEmotion);
-app.get('/primaryCode/:emotion_id', routes.primaryCode);
+
 
 // //new astronaut routes
 // app.get('/create',routes.astroForm); //display form

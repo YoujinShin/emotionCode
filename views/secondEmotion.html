@@ -36,106 +36,140 @@ h2 {
 	border-bottom-color: none !important;
 	border-color: black !important;
 }
+input[type=checkbox] {
+	visibility: hidden;
+}
 </style>
 
 <h2>What emotion could <span style="font-weight:bold"> inspire </span>your work?</h2>
 
-<div id = "legend" class="emotion" style="position:relative; top:20px">
-	<!-- <strong>Obese (%)</strong> -->
-	<nav class='legend clearfix '>
-	  <span class="emotionBG" id="surpise">
-	  	<p class="emotion">SURPRISE</p>
-	  </span>
-	  <span class="emotionBG" id="sadness">
-	  	<p class="emotion">SADNESS</p>
-	  </span>
-	  <span class="emotionBG" id="fear">
-	  	<p class="emotion">FEAR</p>
-	  </span>
-	  <span class="emotionBG" id="anger">
-	  	<p class="emotion">ANGER</p>
-	  </span>
-	  <span class="emotionBG" id="disgust">
-	  	<p class="emotion">DISGUST</p>
-	  </span>
-	  <span class="emotionBG" id="serenity">
-	  	<p class="emotion">SERENITY</p>
-	  </span>
-	  <span class="emotionBG" id="happiness">
-	  	<p class="emotion">HAPPINESS</p>
-	  </span>
-	  <span class="emotionBG" id="freedom">
-	  	<p class="emotion">FREEDOM</p>
-	  </span>
-	</nav>
-</div>
+<form method="POST" action="/createSecondEmotion" role="form" style="position:relative; top:0px;">
+		<input type="text" name="name" value={{emotion.name}} id="name" style="display:none">
+		<input type="text" name="state" value="aspirational" id="state" style="display:none">
 
-<br><br><br>
-<a href="/secondEmotionCode">
-	<button type="button" class="btn btn-default">
+		<nav class='legend clearfix '>
+		  	<label class="emotionBG" id="surpriseC">
+		  			<p class="emotion">SURPRISE</p>
+			  		<input type="checkbox" name="surprise"  value="1" id="surprise">
+			</label>
+
+			<label class="emotionBG" id="sadnessC">
+		  			<p class="emotion">SADNESS</p>
+			  		<input type="checkbox" name="sadness" value="1" id="sadness">
+			</label>
+
+			<label class="emotionBG" id="fearC">
+		  			<p class="emotion">FEAR</p>
+			  		<input type="checkbox" name="fear" value="1" id="fear">
+			</label>
+
+			<label class="emotionBG" id="angerC">
+		  			<p class="emotion">ANGER</p>
+			  		<input type="checkbox" name="anger" value="1" id="anger">
+			</label>
+
+			<label class="emotionBG" id="disgustC">
+		  			<p class="emotion">DISGUST</p>
+			  		<input type="checkbox" name="disgust" value="1" id="disgust">
+			</label>
+
+			<label class="emotionBG" id="serenityC">
+		  			<p class="emotion">SERENITY</p>
+			  		<input type="checkbox" name="serenity" value="1" id="serenity">
+			</label>
+
+			<label class="emotionBG" id="happinessC">
+		  			<p class="emotion">HAPPINESS</p>
+			  		<input type="checkbox" name="happiness" value="1" id="happiness">
+			</label>
+
+			<label class="emotionBG" id="freedomC">
+		  			<p class="emotion">FREEDOM</p>
+			  		<input type="checkbox" name="freedom" value="1" id="freedom">
+			</label>
+		</nav>
+	</div>
+
+	<br><br><br>
+	<button type="submit" class="btn btn-default">
 		Submit
 	</button>
-</a>
-<div style="padding:20px"></div>
+</form>
 
+
+<div style="padding:20px"></div>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
 <script>
 var c = "rgb(170,170,170)";
+var c2 = "rgb(150,150,150)";
+// if(document.getElementById("surprise").checked){
+//   document.getElementById('surpriseHidden').disabled = true;
+// }
 
+///////////////////////////////
 var surprise_clicked = -1;
-$( "#surpise" )
+$( "#surprise" )
   .on( "click", function() {
   	surprise_clicked = surprise_clicked * (-1);
-  	if(surprise_clicked === 1 ) { $( this ).css({ "background-color": "#59a7d8"}); };
-	if(surprise_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("surprise_clicked: "+ surprise_clicked);
+  	if(surprise_clicked === 1 ) {  $( "#surpriseC"  ).css({ "background-color": "#59a7d8"}); };
+	if(surprise_clicked === -1) {  $( "#surpriseC"  ).css({ "background-color": c}); }
   });
 
 var sadness_clicked = -1;
 $( "#sadness" )
   .on( "click", function() {
   	sadness_clicked = sadness_clicked * (-1);
-  	if(sadness_clicked === 1 ) { $( this ).css({ "background-color": "#663ec7"}); };
-	if(sadness_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("sadness_clicked: "+ sadness_clicked);
+  	if(sadness_clicked === 1 ) { $( "#sadnessC" ).css({ "background-color": "#663ec7"}); };
+	if(sadness_clicked === -1) { $( "#sadnessC" ).css({ "background-color": c}); }
   });
 
 var fear_clicked = -1;
 $( "#fear" )
   .on( "click", function() {
   	fear_clicked = fear_clicked * (-1);
-  	if(fear_clicked === 1 ) { $( this ).css({ "background-color": "#62dcc7"}); };
-	if(fear_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("fear_clicked: "+ fear_clicked);
+  	if(fear_clicked === 1 ) { $( "#fearC" ).css({ "background-color": "#62dcc7"}); };
+	if(fear_clicked === -1) { $( "#fearC").css({ "background-color": c}); }
   });
 
 var anger_clicked = -1;
 $( "#anger" )
   .on( "click", function() {
   	anger_clicked = anger_clicked * (-1);
-  	if(anger_clicked === 1 ) { $( this ).css({ "background-color": "#ed462f"}); };
-	if(anger_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("anger_clicked: "+ anger_clicked);
+  	if(anger_clicked === 1 ) { $( "#angerC" ).css({ "background-color": "#ed462f"}); };
+	if(anger_clicked === -1) { $( "#angerC" ).css({ "background-color": c}); }
   });
 
 var disgust_clicked = -1;
 $( "#disgust" )
   .on( "click", function() {
   	disgust_clicked = disgust_clicked * (-1);
-  	if(disgust_clicked === 1 ) { $( this ).css({ "background-color": "#b048be"}); };
-	if(disgust_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("disgust_clicked: "+ disgust_clicked);
+  	if(disgust_clicked === 1 ) { $( "#disgustC" ).css({ "background-color": "#b048be"}); };
+	if(disgust_clicked === -1) { $( "#disgustC" ).css({ "background-color": c}); }
   });
 
 var serenity_clicked = -1;
 $( "#serenity" )
   .on( "click", function() {
   	serenity_clicked = serenity_clicked * (-1);
-  	if(serenity_clicked === 1 ) { $( this ).css({ "background-color": "#8ad698"}); };
-	if(serenity_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("serenity_clicked: "+ serenity_clicked);
+  	if(serenity_clicked === 1 ) { $( "#serenityC" ).css({ "background-color": "#8ad698"}); };
+	if(serenity_clicked === -1) { $( "#serenityC" ).css({ "background-color": c}); }
   });
 
 var happiness_clicked = -1;
 $( "#happiness" )
   .on( "click", function() {
   	happiness_clicked = happiness_clicked * (-1);
-  	if(happiness_clicked === 1 ) { $( this ).css({ "background-color": "#ffed34"}); };
-	if(happiness_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("happiness_clicked: "+ happiness_clicked);
+  	if(happiness_clicked === 1 ) { $( "#happinessC" ).css({ "background-color": "#ffed34"}); };
+	if(happiness_clicked === -1) { $( "#happinessC" ).css({ "background-color": c}); }
   });
 
 var freedom_clicked = -1;
@@ -144,8 +178,46 @@ $( "#freedom" )
   // .on( "mouseleave", function() { $(this).css({"opacity":"1"}); })
   .on( "click", function() {
   	freedom_clicked = freedom_clicked * (-1);
-  	if(freedom_clicked === 1 ) { $( this ).css({ "background-color": "#f49c31"}); };
-	if(freedom_clicked === -1) { $( this ).css({ "background-color": c}); }
+  	console.log("freedom_clicked: "+ freedom_clicked);
+  	if(freedom_clicked === 1 ) { $( "#freedomC" ).css({ "background-color": "#f49c31"}); };
+	if(freedom_clicked === -1) { $( "#freedomC" ).css({ "background-color": c}); }
   });
 
+checkPrimary();
+
+function checkPrimary() {
+	console.log("checkPrimary function");
+	if( {{ emotion.first.surprise }} == 1) { 
+		$( "#surpriseC" ).css({ "background-color": c2 });
+		$('#surprise').attr("disabled", true);
+	}
+	if( {{ emotion.first.sadness }} == 1) { 
+		$( "#sadnessC" ).css({ "background-color": c2 });
+		$('#sadness').attr("disabled", true);
+	}
+	if( {{ emotion.first.fear }} == 1) { 
+		$( "#fearC" ).css({ "background-color": c2 });
+		$('#fear').attr("disabled", true);
+	}
+	if( {{ emotion.first.anger }} == 1) { 
+		$( "#angerC" ).css({ "background-color": c2 });
+		$('#anger').attr("disabled", true);
+	}
+	if( {{ emotion.first.disgust }} == 1) { 
+		$( "#disgustC" ).css({ "background-color": c2 });
+		$('#disgust').attr("disabled", true);
+	}
+	if( {{ emotion.first.serenity }} == 1) { 
+		$( "#serenityC" ).css({ "background-color": c2 });
+		$('#serenity').attr("disabled", true);
+	}
+	if( {{ emotion.first.happiness }} == 1) { 
+		$( "#happinessC" ).css({ "background-color": c2 });
+		$('#happiness').attr("disabled", true);
+	}
+	if( {{ emotion.first.freedom }} == 1) { 
+		$( "#freedomC" ).css({ "background-color": c2 });
+		$('#freedom').attr("disabled", true);
+	}
+}
 </script>
