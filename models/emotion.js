@@ -29,8 +29,8 @@ var EmotionSchema = new Schema({
 		anger: String,
 		disgust: String,
 		serenity: String,
-		happiness: String,
-		freedom: String
+		joy: String,
+		interest: String
 	},
 	second : {
 		surprise : String,
@@ -39,8 +39,8 @@ var EmotionSchema = new Schema({
 		anger: String,
 		disgust: String,
 		serenity: String,
-		happiness: String,
-		freedom: String
+		joy: String,
+		interest: String
 	}
 });
 

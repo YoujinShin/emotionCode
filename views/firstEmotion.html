@@ -8,7 +8,7 @@ body {
 .legend label, .legend span {
     display:block;
     float:left;
-    height:66px;
+    height:60px;
     width:50%;
     text-align:center;
     font-size:10px;
@@ -36,7 +36,7 @@ h2 {
 	border-bottom-color: none !important;
 	border-color: black !important;
 	top: 20px;
-	left: 10% !important;
+	left: 20% !important;
 }
 input[type=checkbox] {
 	visibility: hidden;
@@ -53,10 +53,10 @@ input[type=checkbox] {
 
 <h2>What emotions<span style="font-weight:bold"> inspire </span>your work?</h2>
 
-<p class="description">
+<!-- <p class="description">
 	Select three emotions from the design below and watch for them to appear in your first equation, Enter Emotion Code (EEC), in a design.
 </p>
-
+ -->
 <!-- {{name}} -->
 <!-- <input type="text" name="name" value="yes" id="name"> -->
 
@@ -96,14 +96,14 @@ input[type=checkbox] {
 			  		<input type="checkbox" name="serenity" value="1" id="serenity">
 			</label>
 
-			<label class="emotionBG" id="happinessC">
-		  			<p class="emotion">HAPPINESS</p>
-			  		<input type="checkbox" name="happiness" value="1" id="happiness">
+			<label class="emotionBG" id="joyC">
+		  			<p class="emotion">JOY</p>
+			  		<input type="checkbox" name="joy" value="1" id="joy">
 			</label>
 
-			<label class="emotionBG" id="freedomC">
-		  			<p class="emotion">FREEDOM</p>
-			  		<input type="checkbox" name="freedom" value="1" id="freedom">
+			<label class="emotionBG" id="interestC">
+		  			<p class="emotion">INTEREST</p>
+			  		<input type="checkbox" name="interest" value="1" id="interest">
 			</label>
 		</nav>
 	</div>
@@ -179,24 +179,24 @@ $( "#serenity" )
 	if(serenity_clicked === -1) { $( "#serenityC" ).css({ "background-color": c}); }
   });
 
-var happiness_clicked = -1;
-$( "#happiness" )
+var joy_clicked = -1;
+$( "#joy" )
   .on( "click", function() {
-  	happiness_clicked = happiness_clicked * (-1);
-  	console.log("happiness_clicked: "+ happiness_clicked);
-  	if(happiness_clicked === 1 ) { $( "#happinessC" ).css({ "background-color": "#ffed34"}); };
-	if(happiness_clicked === -1) { $( "#happinessC" ).css({ "background-color": c}); }
+  	joy_clicked = joy_clicked * (-1);
+  	console.log("joy_clicked: "+ joy_clicked);
+  	if(joy_clicked === 1 ) { $( "#joyC" ).css({ "background-color": "#ffed34"}); };
+	if(joy_clicked === -1) { $( "#joyC" ).css({ "background-color": c}); }
   });
 
-var freedom_clicked = -1;
-$( "#freedom" )
+var interest_clicked = -1;
+$( "#interest" )
   // .on( "mouseenter", function() { $(this).css({"opacity":"0.8"}); })
   // .on( "mouseleave", function() { $(this).css({"opacity":"1"}); })
   .on( "click", function() {
-  	freedom_clicked = freedom_clicked * (-1);
-  	console.log("freedom_clicked: "+ freedom_clicked);
-  	if(freedom_clicked === 1 ) { $( "#freedomC" ).css({ "background-color": "#f49c31"}); };
-	if(freedom_clicked === -1) { $( "#freedomC" ).css({ "background-color": c}); }
+  	interest_clicked = interest_clicked * (-1);
+  	console.log("interest_clicked: "+ interest_clicked);
+  	if(interest_clicked === 1 ) { $( "#interestC" ).css({ "background-color": "#f49c31"}); };
+	if(interest_clicked === -1) { $( "#interestC" ).css({ "background-color": c}); }
   });
 
 </script>

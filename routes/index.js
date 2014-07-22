@@ -14,8 +14,9 @@ exports.index = function(req, res) {
 
 exports.checkState = function(req, res) {
 	console.log("checkState page requested");
+	console.log( req.body );
 
-	if(req.body.name == null) {
+	if(req.body.name === "") {
 		console.log("wrong name");
 	} else {
 		var name = req.body.name;
@@ -57,15 +58,15 @@ exports.createFirstEmotion = function(req, res) {
 	console.log("createFirstEmotion requested");
 	var date = moment(this.date), formatted = date.format('YY[-]MM[-]DD[_]HH[:]mm[:]ss[_]');
 
-	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, happinessV, freedomV;
+	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, joyV, interestV;
 	if( req.body.surprise == null) { surpriseV = 0;} else { surpriseV = 1 ;}
 	if( req.body.sadness == null) {  sadnessV = 0;} else { sadnessV = 1 ;}
 	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
 	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
 	if( req.body.disgust == null) {  disgustV = 0;} else { disgustV = 1 ;}
 	if( req.body.serenity == null) {  serenityV = 0;} else { serenityV = 1 ;}
-	if( req.body.happiness == null) {  happinessV = 0;} else { happinessV = 1 ;}
-	if( req.body.freedom == null) {  freedomV = 0;} else { freedomV = 1 ;}
+	if( req.body.joy == null) {  joyV = 0;} else { joyV = 1 ;}
+	if( req.body.interest == null) {  interestV = 0;} else { interestV = 1 ;}
  
 	var newEmotion = new emotionModel({
 		slug : req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
@@ -78,8 +79,8 @@ exports.createFirstEmotion = function(req, res) {
 			anger : angerV,
 			disgust : disgustV,
 			serenity : serenityV,
-			happiness : happinessV,
-			freedom : freedomV
+			joy : joyV,
+			interest : interestV
 		}
 	});
 
@@ -145,15 +146,15 @@ exports.createSecondEmotion = function(req, res) {
 	var emotion_id = req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'); 
 	var emotionQuery = emotionModel.findOne({slug:emotion_id}); 
 
-	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, happinessV, freedomV;
+	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, joyV, interestV;
 	if( req.body.surprise == null) { surpriseV = 0;} else { surpriseV = 1 ;}
 	if( req.body.sadness == null) {  sadnessV = 0;} else { sadnessV = 1 ;}
 	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
 	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
 	if( req.body.disgust == null) {  disgustV = 0;} else { disgustV = 1 ;}
 	if( req.body.serenity == null) {  serenityV = 0;} else { serenityV = 1 ;}
-	if( req.body.happiness == null) {  happinessV = 0;} else { happinessV = 1 ;}
-	if( req.body.freedom == null) {  freedomV = 0;} else { freedomV = 1 ;}
+	if( req.body.joy == null) {  joyV = 0;} else { joyV = 1 ;}
+	if( req.body.interest == null) {  interestV = 0;} else { interestV = 1 ;}
  
 	var updatedData = {
 		slug : req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
@@ -166,8 +167,8 @@ exports.createSecondEmotion = function(req, res) {
 			anger : angerV,
 			disgust : disgustV,
 			serenity : serenityV,
-			happiness : happinessV,
-			freedom : freedomV
+			joy : joyV,
+			interest : interestV
 		}
 	};
 

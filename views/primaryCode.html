@@ -1,6 +1,6 @@
 <style>
 	body {
-		font: 1.2em sans-serif !important;
+		font-family: sans-serif !important;
 		letter-spacing: 1px !important;
 		background: black;
 	}
@@ -11,7 +11,7 @@
 		width: 100%;
 	}
 	p {
-		font: 1.6em sans-serif !important;
+		/*font: 1.6em sans-serif !important;*/
 		color: white;
 		line-height:140% !important;
 	}
@@ -37,9 +37,16 @@
 		Crack your aspirational emotion
 	</button>
 </form> -->
+ 
+
+<p><span style="font-weight:bold; font-size: 1.6em;">Enter Emotion Code (EEC) </span>
+
+<br><br>
+<span style="font-size:1em; color:rgb(80,80,80)">Enjoy your experience. Don’t forget to log in before you leave to receive your full Emotion Code.
 
 
-<p>Enter Emotion Code <span style="font-weight:bold; "></span></p><br>
+
+</span></p><br>
 <a href="/">
 	<button type="button" class="btn btn-default" style="background-color:black !important;" >
 		Go to the first page
@@ -100,11 +107,11 @@ var data = [
 	"emotion": "serenity",
 	"selected": {{ emotion.first.serenity }}
 }, {
-	"emotion": "happiness",
-	"selected": {{ emotion.first.happiness }}
+	"emotion": "joy",
+	"selected": {{ emotion.first.joy }}
 }, {
-	"emotion": "freedom",
-	"selected": {{ emotion.first.freedom }}
+	"emotion": "interest",
+	"selected": {{ emotion.first.interest }}
 }];
 
 console.log(data);
@@ -162,8 +169,8 @@ function getColor(d) {
 	else if(d === "anger") { return "#ed462f"; } 
 	else if(d === "disgust") { return "#b048be"; } 
 	else if(d === "serenity") { return "#8ad698"; } 
-	else if(d === "happiness") { return "#ffed34"; } 
-	else if(d === "freedom") { return "#f49c31"; }
+	else if(d === "joy") { return "#ffed34"; } 
+	else if(d === "interest") { return "#f49c31"; }
 }
 
 </script>
