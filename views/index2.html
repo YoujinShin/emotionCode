@@ -6,6 +6,13 @@ body {
 	letter-spacing: 1px;
 	font-weight: 100;
 }
+.logo {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 80px;
+	opacity: 0.6;
+}
 .bg {
 	position: absolute;
 	top: 0px;
@@ -29,8 +36,15 @@ a, a:hover {
 	color: none;
 	text-decoration: none;
 }
+.description {
+	position: relative;
+	top: 200px;
+	font: 0.56em sans-serif;
+	font-weight: lighter;
+	color: rgb(70,70,70);
+}
 </style>
-<!-- <img class="bg" src="/img/ecode.png" > -->
+<!-- <img class="logo" src="/img/decoder_black.png" > -->
 
 <form method="POST" action="/checkState" role="form" style="position:relative; top:140px;">
 	
@@ -43,6 +57,9 @@ a, a:hover {
 	</button>
 </form>
 
+<p class="description">
+	Emotions have the ability to drive and inspire us but can block and limit us if we don't take time to understand and own them. Playing with the idea that we each have an emotion code, we invite you to answer a few questions as you enter the Crack Your Emotion Code experience and as you exit to jump-start your thinking.
+</p>
 <!-- <div style="position:relative; top:140px;">
 	<p>What is your <span style="font-weight:bold; ">emotion ID</span> ?</p>
 	<input type="text" class="form-control" id="name">
