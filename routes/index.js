@@ -58,29 +58,44 @@ exports.createFirstEmotion = function(req, res) {
 	console.log("createFirstEmotion requested");
 	var date = moment(this.date), formatted = date.format('YY[-]MM[-]DD[_]HH[:]mm[:]ss[_]');
 
-	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, joyV, interestV;
+	var surpriseV, disapprovalV, sadnessV, remorseV, disgustV, contemptV, angerV,
+	aggressivenessV, interestV, optimismV, joyV, loveV, trustV, submissionV, fearV;
 	if( req.body.surprise == null) { surpriseV = 0;} else { surpriseV = 1 ;}
+	if( req.body.disapproval == null) { disapprovalV = 0;} else { disapprovalV = 1 ;}
 	if( req.body.sadness == null) {  sadnessV = 0;} else { sadnessV = 1 ;}
-	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
-	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
+	if( req.body.remorse == null) {  remorseV = 0;} else { remorseV = 1 ;}
 	if( req.body.disgust == null) {  disgustV = 0;} else { disgustV = 1 ;}
-	if( req.body.serenity == null) {  serenityV = 0;} else { serenityV = 1 ;}
-	if( req.body.joy == null) {  joyV = 0;} else { joyV = 1 ;}
+	if( req.body.contempt == null) {  contemptV = 0;} else { contemptV = 1 ;}
+	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
+	if( req.body.aggressiveness == null) {  aggressivenessV = 0;} else { aggressivenessV = 1 ;}
 	if( req.body.interest == null) {  interestV = 0;} else { interestV = 1 ;}
+	if( req.body.optimism == null) {  optimismV = 0;} else { optimismV = 1 ;}
+	if( req.body.joy == null) {  joyV = 0;} else { joyV = 1 ;}
+	if( req.body.love == null) {  loveV = 0;} else { loveV = 1 ;}
+	if( req.body.trust == null) {  trustV = 0;} else { trustV = 1 ;}
+	if( req.body.submission == null) {  submissionV = 0;} else { submissionV = 1 ;}
+	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
  
 	var newEmotion = new emotionModel({
 		slug : req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
 		name : req.body.name,
 		state : req.body.state,
 		first : {
-			surprise : surpriseV,
-			sadness : sadnessV,
-			fear : fearV,
-			anger : angerV,
-			disgust : disgustV,
-			serenity : serenityV,
-			joy : joyV,
-			interest : interestV
+			surprise : surpriseV,//
+			disapproval: disapprovalV,//
+			sadness : sadnessV,//
+			remorse: remorseV,//
+			disgust: disgustV,//
+			contempt: contemptV,//
+			anger: angerV,//
+			aggressiveness: aggressivenessV,//
+			interest: interestV,//
+			optimism: optimismV,//
+			joy: joyV,//
+			love: loveV,//
+			trust: trustV,//
+			submission: submissionV,
+			fear: fearV
 		}
 	});
 
@@ -146,29 +161,44 @@ exports.createSecondEmotion = function(req, res) {
 	var emotion_id = req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'); 
 	var emotionQuery = emotionModel.findOne({slug:emotion_id}); 
 
-	var surpriseV, sadnessV, fearV, angerV, disgustV, serenityV, joyV, interestV;
+	var surpriseV, disapprovalV, sadnessV, remorseV, disgustV, contemptV, angerV,
+	aggressivenessV, interestV, optimismV, joyV, loveV, trustV, submissionV, fearV;
 	if( req.body.surprise == null) { surpriseV = 0;} else { surpriseV = 1 ;}
+	if( req.body.disapproval == null) { disapprovalV = 0;} else { disapprovalV = 1 ;}
 	if( req.body.sadness == null) {  sadnessV = 0;} else { sadnessV = 1 ;}
-	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
-	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
+	if( req.body.remorse == null) {  remorseV = 0;} else { remorseV = 1 ;}
 	if( req.body.disgust == null) {  disgustV = 0;} else { disgustV = 1 ;}
-	if( req.body.serenity == null) {  serenityV = 0;} else { serenityV = 1 ;}
-	if( req.body.joy == null) {  joyV = 0;} else { joyV = 1 ;}
+	if( req.body.contempt == null) {  contemptV = 0;} else { contemptV = 1 ;}
+	if( req.body.anger == null) {  angerV = 0;} else { angerV = 1 ;}
+	if( req.body.aggressiveness == null) {  aggressivenessV = 0;} else { aggressivenessV = 1 ;}
 	if( req.body.interest == null) {  interestV = 0;} else { interestV = 1 ;}
+	if( req.body.optimism == null) {  optimismV = 0;} else { optimismV = 1 ;}
+	if( req.body.joy == null) {  joyV = 0;} else { joyV = 1 ;}
+	if( req.body.love == null) {  loveV = 0;} else { loveV = 1 ;}
+	if( req.body.trust == null) {  trustV = 0;} else { trustV = 1 ;}
+	if( req.body.submission == null) {  submissionV = 0;} else { submissionV = 1 ;}
+	if( req.body.fear == null) {  fearV = 0;} else { fearV = 1 ;}
  
 	var updatedData = {
 		slug : req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_'),
 		name : req.body.name,
 		state : req.body.state,
 		second : {
-			surprise : surpriseV,
-			sadness : sadnessV,
-			fear : fearV,
-			anger : angerV,
-			disgust : disgustV,
-			serenity : serenityV,
-			joy : joyV,
-			interest : interestV
+			surprise : surpriseV,//
+			disapproval: disapprovalV,//
+			sadness : sadnessV,//
+			remorse: remorseV,//
+			disgust: disgustV,//
+			contempt: contemptV,//
+			anger: angerV,//
+			aggressiveness: aggressivenessV,//
+			interest: interestV,//
+			optimism: optimismV,//
+			joy: joyV,//
+			love: loveV,//
+			trust: trustV,//
+			submission: submissionV,
+			fear: fearV
 		}
 	};
 

@@ -87,27 +87,49 @@ var data = [
 	"emotion": "surprise",
 	"selected": {{ emotion.first.surprise }}
 }, {
+	"emotion": "disapproval",
+	"selected": {{ emotion.first.disapproval }}
+}, {
 	"emotion": "sadness",
 	"selected": {{ emotion.first.sadness }}
 }, {
-	"emotion": "fear",
-	"selected": {{ emotion.first.fear }}
-}, {
-	"emotion": "anger",
-	"selected": {{ emotion.first.anger }}
+	"emotion": "remorse",
+	"selected": {{ emotion.first.remorse }}
 }, {
 	"emotion": "disgust",
 	"selected": {{ emotion.first.disgust }}
 }, {
-	"emotion": "serenity",
-	"selected": {{ emotion.first.serenity }}
+	"emotion": "contempt",
+	"selected": {{ emotion.first.contempt }}
+}, {
+	"emotion": "anger",
+	"selected": {{ emotion.first.anger }}
+}, {
+	"emotion": "aggressiveness",
+	"selected": {{ emotion.first.aggressiveness }}
+}, {
+	"emotion": "interest",
+	"selected": {{ emotion.first.interest }}
+}, {
+	"emotion": "optimism",
+	"selected": {{ emotion.first.optimism }}
 }, {
 	"emotion": "joy",
 	"selected": {{ emotion.first.joy }}
 }, {
-	"emotion": "interest",
-	"selected": {{ emotion.first.interest }}
-}];
+	"emotion": "love",
+	"selected": {{ emotion.first.love }}
+}, {
+	"emotion": "trust",
+	"selected": {{ emotion.first.trust }}
+}, {
+	"emotion": "submission",
+	"selected": {{ emotion.first.submission }}
+}, {
+	"emotion": "fear",
+	"selected": {{ emotion.first.fear }}
+}
+];
 
 console.log(data);
 makeRadial();
@@ -125,16 +147,18 @@ function makeRadial() {
 						.enter().append("line")
 						.attr("transform", "translate("+tx+","+ty+ ")");
 
+	var th = 2*Math.PI / 14; // Math.PI / 4
+
 	firstRadial.attr("x1", function(d, i) { 
 			console.log(d);
-			return Math.cos(i * Math.PI / 4) * radius; })
+			return Math.cos(i * th) * radius; })
 		.attr("y1", function(d, i) {
-			return Math.sin(i * Math.PI / 4) * radius; })
+			return Math.sin(i * th) * radius; })
 		.attr("x2", function(d, i) {
-			return Math.cos(i * Math.PI / 4) * radius *0.06; })
+			return Math.cos(i * th) * radius *0.06; })
 		.attr("y2", function(d, i) {
-			return Math.sin(i * Math.PI / 4) * radius *0.06; })
-		.attr("stroke-width", 5)
+			return Math.sin(i * th) * radius *0.06; })
+		.attr("stroke-width", 3)
 		.attr("stroke", function(d) {
 			if(d.selected === 1) {
 				return getColor(d.emotion);
@@ -144,7 +168,7 @@ function makeRadial() {
 		})
 		.on("mouseover", function(d){
           tooltip.text(d.emotion );
-          d3.select(this).style("stroke-width", 12);
+          d3.select(this).style("stroke-width", 10);
           tooltip.style("visibility", "visible");
         })
         .on("mousemove", function(){
@@ -152,20 +176,27 @@ function makeRadial() {
           		 .style("left",(event.pageX+10)+"px");
         })
         .on("mouseout", function(){
-          d3.select(this).style("stroke-width", 5);
+          d3.select(this).style("stroke-width", 3);
           tooltip.style("visibility", "hidden"); 
       	});
 }
 
 function getColor(d) {
-	if(d === "surprise") { return "#59a7d8"; }
-	else if(d === "sadness") { return "#663ec7"; } 
-	else if(d === "fear") { return "#62dcc7"; } 
-	else if(d === "anger") { return "#ed462f"; } 
-	else if(d === "disgust") { return "#b048be"; } 
-	else if(d === "serenity") { return "#8ad698"; } 
-	else if(d === "joy") { return "#ffed34"; } 
-	else if(d === "interest") { return "#f49c31"; }
+	if(d === "surprise") { return "#33a9c5"; }
+	else if(d === "disapproval") { return "#6c77b9"; } 
+	else if(d === "sadness") { return "#4956a5"; } 
+	else if(d === "remorse") { return "#8d73b4"; } 
+	else if(d === "disgust") { return "#8d418b"; } 
+	else if(d === "contempt") { return "#e9746d"; } 
+	else if(d === "anger") { return "#df4342"; } 
+	else if(d === "aggressiveness") { return "#ea8b5b"; }
+	else if(d === "interest") { return "#de8131"; } 
+	else if(d === "optimism") { return "#e5d953"; } 
+	else if(d === "joy") { return "#c7c638"; } 
+	else if(d === "love") { return "#a6c160"; } 
+	else if(d === "trust") { return "#73b049"; } 
+	else if(d === "submission") { return "#7cc37d"; } 
+	else if(d === "fear") { return "#2eb69d"; }
 }
 
 </script>

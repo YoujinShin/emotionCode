@@ -9,12 +9,12 @@ body {
 .legend label, .legend span {
     display:block;
     float:left;
-    height:66px;
+    height:50px;
     width:50%;
     text-align:center;
     font-size:10px;
     color:#808080;
-    margin-top: 3px;
+    margin-top: 1px;
 }
 .emotion {
 	position: relative;
@@ -50,9 +50,14 @@ input[type=checkbox] {
 		<input type="text" name="state" value="aspirational" id="state" style="display:none">
 
 		<nav class='legend clearfix '>
-		  	<label class="emotionBG" id="surpriseC">
+			<label class="emotionBG" id="surpriseC">
 		  			<p class="emotion">SURPRISE</p>
 			  		<input type="checkbox" name="surprise"  value="1" id="surprise">
+			</label>
+
+			<label class="emotionBG" id="disapprovalC">
+		  			<p class="emotion">DISAPPROVAL</p>
+			  		<input type="checkbox" name="disapproval"  value="1" id="disapproval">
 			</label>
 
 			<label class="emotionBG" id="sadnessC">
@@ -60,14 +65,9 @@ input[type=checkbox] {
 			  		<input type="checkbox" name="sadness" value="1" id="sadness">
 			</label>
 
-			<label class="emotionBG" id="fearC">
-		  			<p class="emotion">FEAR</p>
-			  		<input type="checkbox" name="fear" value="1" id="fear">
-			</label>
-
-			<label class="emotionBG" id="angerC">
-		  			<p class="emotion">ANGER</p>
-			  		<input type="checkbox" name="anger" value="1" id="anger">
+			<label class="emotionBG" id="remorseC">
+		  			<p class="emotion">REMORSE</p>
+			  		<input type="checkbox" name="remorse" value="1" id="remorse">
 			</label>
 
 			<label class="emotionBG" id="disgustC">
@@ -75,9 +75,29 @@ input[type=checkbox] {
 			  		<input type="checkbox" name="disgust" value="1" id="disgust">
 			</label>
 
-			<label class="emotionBG" id="serenityC">
-		  			<p class="emotion">SERENITY</p>
-			  		<input type="checkbox" name="serenity" value="1" id="serenity">
+			<label class="emotionBG" id="contemptC">
+		  			<p class="emotion">CONTEMPT</p>
+			  		<input type="checkbox" name="contempt" value="1" id="contempt">
+			</label>
+
+			<label class="emotionBG" id="angerC">
+		  			<p class="emotion">ANGER</p>
+			  		<input type="checkbox" name="anger" value="1" id="anger">
+			</label>
+
+			<label class="emotionBG" id="aggressivenessC">
+		  			<p class="emotion">AGGRESSIVENESS</p>
+			  		<input type="checkbox" name="aggressiveness" value="1" id="aggressiveness">
+			</label>
+
+			<label class="emotionBG" id="interestC">
+		  			<p class="emotion">INTEREST</p>
+			  		<input type="checkbox" name="interest" value="1" id="interest">
+			</label>
+
+			<label class="emotionBG" id="optimismC">
+		  			<p class="emotion">OPTIMISM</p>
+			  		<input type="checkbox" name="optimism" value="1" id="optimism">
 			</label>
 
 			<label class="emotionBG" id="joyC">
@@ -85,9 +105,24 @@ input[type=checkbox] {
 			  		<input type="checkbox" name="joy" value="1" id="joy">
 			</label>
 
-			<label class="emotionBG" id="interestC">
-		  			<p class="emotion">INTEREST</p>
-			  		<input type="checkbox" name="interest" value="1" id="interest">
+			<label class="emotionBG" id="loveC">
+		  			<p class="emotion">LOVE</p>
+			  		<input type="checkbox" name="love" value="1" id="love">
+			</label>
+
+			<label class="emotionBG" id="trustC">
+		  			<p class="emotion">TRUST</p>
+			  		<input type="checkbox" name="trust" value="1" id="trust">
+			</label>
+			
+			<label class="emotionBG" id="submissionC">
+		  			<p class="emotion">SUBMISSION</p>
+			  		<input type="checkbox" name="submission" value="1" id="submission">
+			</label>
+			
+			<label class="emotionBG" id="fearC">
+		  			<p class="emotion">FEAR</p>
+			  		<input type="checkbox" name="fear" value="1" id="fear">
 			</label>
 		</nav>
 	</div>
@@ -110,14 +145,22 @@ var c2 = "rgb(150,150,150)";
 //   document.getElementById('surpriseHidden').disabled = true;
 // }
 
-///////////////////////////////
 var surprise_clicked = -1;
 $( "#surprise" )
   .on( "click", function() {
   	surprise_clicked = surprise_clicked * (-1);
   	console.log("surprise_clicked: "+ surprise_clicked);
-  	if(surprise_clicked === 1 ) {  $( "#surpriseC"  ).css({ "background-color": "#59a7d8"}); };
+  	if(surprise_clicked === 1 ) {  $( "#surpriseC"  ).css({ "background-color": "#33a9c5"}); };
 	if(surprise_clicked === -1) {  $( "#surpriseC"  ).css({ "background-color": c}); }
+  });
+
+var disapproval_clicked = -1;
+$( "#disapproval" )
+  .on( "click", function() {
+  	disapproval_clicked = disapproval_clicked * (-1);
+  	console.log("disapproval_clicked: "+ disapproval_clicked);
+  	if(disapproval_clicked === 1 ) {  $( "#disapprovalC"  ).css({ "background-color": "#6c77b9"}); };
+	if(disapproval_clicked === -1) {  $( "#disapprovalC"  ).css({ "background-color": c}); }
   });
 
 var sadness_clicked = -1;
@@ -125,26 +168,17 @@ $( "#sadness" )
   .on( "click", function() {
   	sadness_clicked = sadness_clicked * (-1);
   	console.log("sadness_clicked: "+ sadness_clicked);
-  	if(sadness_clicked === 1 ) { $( "#sadnessC" ).css({ "background-color": "#663ec7"}); };
+  	if(sadness_clicked === 1 ) { $( "#sadnessC" ).css({ "background-color": "#4956a5"}); };
 	if(sadness_clicked === -1) { $( "#sadnessC" ).css({ "background-color": c}); }
   });
 
-var fear_clicked = -1;
-$( "#fear" )
+var remorse_clicked = -1;
+$( "#remorse" )
   .on( "click", function() {
-  	fear_clicked = fear_clicked * (-1);
-  	console.log("fear_clicked: "+ fear_clicked);
-  	if(fear_clicked === 1 ) { $( "#fearC" ).css({ "background-color": "#62dcc7"}); };
-	if(fear_clicked === -1) { $( "#fearC").css({ "background-color": c}); }
-  });
-
-var anger_clicked = -1;
-$( "#anger" )
-  .on( "click", function() {
-  	anger_clicked = anger_clicked * (-1);
-  	console.log("anger_clicked: "+ anger_clicked);
-  	if(anger_clicked === 1 ) { $( "#angerC" ).css({ "background-color": "#ed462f"}); };
-	if(anger_clicked === -1) { $( "#angerC" ).css({ "background-color": c}); }
+  	remorse_clicked = remorse_clicked * (-1);
+  	console.log("remorse_clicked: "+ remorse_clicked);
+  	if(remorse_clicked === 1 ) { $( "#remorseC" ).css({ "background-color": "#8d73b4"}); };
+	if(remorse_clicked === -1) { $( "#remorseC" ).css({ "background-color": c}); }
   });
 
 var disgust_clicked = -1;
@@ -152,17 +186,53 @@ $( "#disgust" )
   .on( "click", function() {
   	disgust_clicked = disgust_clicked * (-1);
   	console.log("disgust_clicked: "+ disgust_clicked);
-  	if(disgust_clicked === 1 ) { $( "#disgustC" ).css({ "background-color": "#b048be"}); };
+  	if(disgust_clicked === 1 ) { $( "#disgustC" ).css({ "background-color": "#8d418b"}); };
 	if(disgust_clicked === -1) { $( "#disgustC" ).css({ "background-color": c}); }
   });
 
-var serenity_clicked = -1;
-$( "#serenity" )
+var contempt_clicked = -1;
+$( "#contempt" )
   .on( "click", function() {
-  	serenity_clicked = serenity_clicked * (-1);
-  	console.log("serenity_clicked: "+ serenity_clicked);
-  	if(serenity_clicked === 1 ) { $( "#serenityC" ).css({ "background-color": "#8ad698"}); };
-	if(serenity_clicked === -1) { $( "#serenityC" ).css({ "background-color": c}); }
+  	contempt_clicked = contempt_clicked * (-1);
+  	console.log("contempt_clicked: "+ contempt_clicked);
+  	if(contempt_clicked === 1 ) { $( "#contemptC" ).css({ "background-color": "#e9746d"}); };
+	if(contempt_clicked === -1) { $( "#contemptC").css({ "background-color": c}); }
+  });
+
+var anger_clicked = -1;
+$( "#anger" )
+  .on( "click", function() {
+  	anger_clicked = anger_clicked * (-1);
+  	console.log("anger_clicked: "+ anger_clicked);
+  	if(anger_clicked === 1 ) { $( "#angerC" ).css({ "background-color": "#df4342"}); };
+	if(anger_clicked === -1) { $( "#angerC" ).css({ "background-color": c}); }
+  });
+
+var aggressiveness_clicked = -1;
+$( "#aggressiveness" )
+  .on( "click", function() {
+  	aggressiveness_clicked = aggressiveness_clicked * (-1);
+  	console.log("aggressiveness_clicked: "+ aggressiveness_clicked);
+  	if(aggressiveness_clicked === 1 ) { $( "#aggressivenessC" ).css({ "background-color": "#ea8b5b"}); };
+	if(aggressiveness_clicked === -1) { $( "#aggressivenessC").css({ "background-color": c}); }
+  });
+
+var interest_clicked = -1;
+$( "#interest" )
+  .on( "click", function() {
+  	interest_clicked = interest_clicked * (-1);
+  	console.log("interest_clicked: "+ interest_clicked);
+  	if(interest_clicked === 1 ) { $( "#interestC" ).css({ "background-color": "#de8131"}); };
+	if(interest_clicked === -1) { $( "#interestC" ).css({ "background-color": c}); }
+  });
+
+var optimism_clicked = -1;
+$( "#optimism" )
+  .on( "click", function() {
+  	optimism_clicked = optimism_clicked * (-1);
+  	console.log("optimism_clicked: "+ optimism_clicked);
+  	if(optimism_clicked === 1 ) { $( "#optimismC" ).css({ "background-color": "#e5d953"}); };
+	if(optimism_clicked === -1) { $( "#optimismC").css({ "background-color": c}); }
   });
 
 var joy_clicked = -1;
@@ -170,20 +240,47 @@ $( "#joy" )
   .on( "click", function() {
   	joy_clicked = joy_clicked * (-1);
   	console.log("joy_clicked: "+ joy_clicked);
-  	if(joy_clicked === 1 ) { $( "#joyC" ).css({ "background-color": "#ffed34"}); };
+  	if(joy_clicked === 1 ) { $( "#joyC" ).css({ "background-color": "#c7c638"}); };
 	if(joy_clicked === -1) { $( "#joyC" ).css({ "background-color": c}); }
   });
 
-var interest_clicked = -1;
-$( "#interest" )
-  // .on( "mouseenter", function() { $(this).css({"opacity":"0.8"}); })
-  // .on( "mouseleave", function() { $(this).css({"opacity":"1"}); })
+var love_clicked = -1;
+$( "#love" )
   .on( "click", function() {
-  	interest_clicked = interest_clicked * (-1);
-  	console.log("interest_clicked: "+ interest_clicked);
-  	if(interest_clicked === 1 ) { $( "#interestC" ).css({ "background-color": "#f49c31"}); };
-	if(interest_clicked === -1) { $( "#interestC" ).css({ "background-color": c}); }
+  	love_clicked = love_clicked * (-1);
+  	console.log("love_clicked: "+ love_clicked);
+  	if(love_clicked === 1 ) { $( "#loveC" ).css({ "background-color": "#a6c160"}); };
+	if(love_clicked === -1) { $( "#loveC").css({ "background-color": c}); }
   });
+
+var trust_clicked = -1;
+$( "#trust" )
+  .on( "click", function() {
+  	trust_clicked = trust_clicked * (-1);
+  	console.log("trust_clicked: "+ trust_clicked);
+  	if(trust_clicked === 1 ) { $( "#trustC" ).css({ "background-color": "#73b049"}); };
+	if(trust_clicked === -1) { $( "#trustC").css({ "background-color": c}); }
+  });
+
+var submission_clicked = -1;
+$( "#submission" )
+  .on( "click", function() {
+  	submission_clicked = submission_clicked * (-1);
+  	console.log("submission_clicked: "+ submission_clicked);
+  	if(submission_clicked === 1 ) { $( "#submissionC" ).css({ "background-color": "#7cc37d"}); };
+	if(submission_clicked === -1) { $( "#submissionC" ).css({ "background-color": c}); }
+  });
+
+
+var fear_clicked = -1;
+$( "#fear" )
+  .on( "click", function() {
+  	fear_clicked = fear_clicked * (-1);
+  	console.log("fear_clicked: "+ fear_clicked);
+  	if(fear_clicked === 1 ) { $( "#fearC" ).css({ "background-color": "#2eb69d"}); };
+	if(fear_clicked === -1) { $( "#fearC").css({ "background-color": c}); }
+  });
+
 
 // checkPrimary();
 

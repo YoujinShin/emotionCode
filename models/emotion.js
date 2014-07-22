@@ -23,24 +23,38 @@ var EmotionSchema = new Schema({
 	name : String,
 	state : String,
 	first : {
-		surprise : String,
-		sadness : String,
-		fear: String,
-		anger: String,
-		disgust: String,
-		serenity: String,
-		joy: String,
-		interest: String
+		surprise : String,//
+		disapproval: String,//
+		sadness : String,//
+		remorse: String,//
+		disgust: String,//
+		contempt: String,//
+		anger: String,//
+		aggressiveness: String,//
+		interest: String,//
+		optimism: String,//
+		joy: String,//
+		love: String,//
+		trust: String,//
+		submission: String,
+		fear: String
 	},
 	second : {
 		surprise : String,
+		disapproval: String,
 		sadness : String,
-		fear: String,
-		anger: String,
+		remorse: String,
 		disgust: String,
-		serenity: String,
+		contempt: String,
+		anger: String,
+		aggressiveness: String,
+		interest: String,
+		optimism: String,
 		joy: String,
-		interest: String
+		love: String,
+		trust: String,
+		submission: String,
+		fear: String
 	}
 });
 
