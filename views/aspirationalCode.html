@@ -40,7 +40,7 @@
 	</div>
 
 	<div class="col-md-6" style="top:20px">
-		<p style="font-size:1.6em;"> <span style="font-weight:bold;">Mindful Emotion Code (MEC)</span></p>
+		<p style="font-size:1.6em;"> Here is your <br><span style="font-weight:bold;">Mindful Emotion Code (MEC)</span></p>
 
 		<p style="font-size:1em; color: rgb(80,80,80);">
 <!-- 			Enter Emotion Code (EEC) 
@@ -49,6 +49,11 @@
 
 		<br><br> -->
 		The hope is that you will begin to spend more time with your emotions, imagining how you can better tend to your feelings and purpose or repurpose them for creative intelligent action.
+
+		<br><br>
+		For more information on cracking your emotion code, go to 
+		 <a href="http://www.thetapin.org/">thetapin.org</a> or contact
+		 <a href="mailto:wetapin@thetapin.org"> wetapin@thetapin.org </a>
 		</p>
 
 		<br>
@@ -244,13 +249,13 @@ function makeRadial() {
 						.attr("transform", "translate("+tx+","+ty+")");
 
 	secondRadial.attr("x1", function(d, i) { 
-			return Math.cos(i * th + th/2) * radius; })
+			return Math.cos(i * th + th/6) * radius; })
 		.attr("y1", function(d, i) {
-			return Math.sin(i * th + th/2) * radius; })
+			return Math.sin(i * th + th/6) * radius; })
 		.attr("x2", function(d, i) {
-			return Math.cos(i * th + th/2) * radius*0.06; })
+			return Math.cos(i * th + th/6) * radius*0.06; })
 		.attr("y2", function(d, i) {
-			return Math.sin(i * th + th/2) * radius*0.06; })
+			return Math.sin(i * th + th/6) * radius*0.06; })
 		.attr("stroke-width", 3)
 		.attr("stroke", function(d) {
 			if(d.selected === 1) {
