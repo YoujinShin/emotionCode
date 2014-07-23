@@ -1,6 +1,5 @@
 <style>
 body {
-	/*font: 1em sans-serif;*/
 	font-family: sans-serif;
 	letter-spacing: 1px;
 	padding: 5%;
@@ -45,14 +44,17 @@ input[type=checkbox] {
 .description {
 	position: relative;
 	top: 10px;
-	font: 0.6em sans-serif !important;
+	font: 0.9em sans-serif !important;
 	font-weight: lighter;
-	color: rgb(160,160,160);
+	color: grey;
+	padding-bottom: 15px;
 }
 </style>
  <!-- <link rel="stylesheet" href="/css/checkDesign.css"> -->
 
 <h2>What emotions<span style="font-weight:bold"> inspire </span>your work?</h2>
+
+<p class="description">Select emotions from the design below and watch for them to appear in your first equation, <span style="font-weight:bold">Enter Emotion Code (EEC)</span>, in a design. </p>
 
 <form method="POST" action="/createFirstEmotion" role="form" style="position:relative; top:10px;">
 		<input type="text" name="name" value={{name}} id="name" style="display:none">
@@ -137,13 +139,13 @@ input[type=checkbox] {
 		</nav>
 	</div>
 
-	<br><br>
+	<br>
 	<button type="submit" class="btn btn-default">
 		Submit
 	</button>
 </form>
 
-<div style="position:relative; padding:30px; color:grey; font-size:0.8em !important; text-align:center; top:30px;">
+<div style="position:relative; padding:30px; color:grey; font-size:0.8em !important; text-align:center; top:20px;">
 	BY <a href="http://www.youjinshin.com/" style="color:grey; ">YOUJIN SHIN</a>
 </div>
 <!-- <div style="padding:20px; background-color: grey;">
