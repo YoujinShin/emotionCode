@@ -139,16 +139,22 @@ var data = [
 }
 ];
 
-console.log(data);
+// console.log(data);
+var radius = width*0.38;
+var tx = (width + margin.left + margin.right)/2;
+var ty = (height + margin.top + margin.bottom)/2 - 20;
+
+
+guideCircle();
 makeRadial();
 
 function makeRadial() {
 	console.log("makeRadial function");
 	// console.log(document.getElementById('name').value);
 
-	var radius = width*0.38;
-	var tx = (width + margin.left + margin.right)/2;
-	var ty = (height + margin.top + margin.bottom)/2 - 20;
+	// var radius = width*0.38;
+	// var tx = (width + margin.left + margin.right)/2;
+	// var ty = (height + margin.top + margin.bottom)/2 - 20;
 
 	var firstRadial = svg.selectAll(".radial")
 							.data(data)
@@ -159,9 +165,9 @@ function makeRadial() {
 
 	firstRadial.attr("x1", function(d, i) { 
 			console.log(d);
-			return Math.cos(i * th) * radius; })
+			return Math.cos(i * th) * radius*0.5; })
 		.attr("y1", function(d, i) {
-			return Math.sin(i * th) * radius; })
+			return Math.sin(i * th) * radius*0.5; })
 		.attr("x2", function(d, i) {
 			return Math.cos(i * th) * radius *0.06; })
 		.attr("y2", function(d, i) {
@@ -188,6 +194,41 @@ function makeRadial() {
           tooltip.style("visibility", "hidden"); 
       	});
 }
+
+function guideCircle() {
+	var EEC = svg.append("circle")
+		.attr("cx", tx )
+		.attr("cy", ty )
+		.attr("r", radius*0.5 )
+		.style("fill", "none")
+		.style("stroke-dasharray", ("1, 4"))
+		.attr("stroke-width", 1)
+		.attr("stroke", "rgb(140,140,140)");
+
+	var XEC = svg.append("circle")
+		.attr("cx", tx )
+		.attr("cy", ty )
+		.attr("r", radius*1 )
+		.style("fill", "none")
+		.style("stroke-dasharray", ("1, 4"))
+		.attr("stroke-width", 1)
+		.attr("stroke", "rgb(140,140,140)");
+    
+    var EEC_text = svg.append("text")
+            .attr("x", tx+ 30)
+            .attr("y", ty - radius*0.5-2)
+            .attr("font-size", "0.66em")
+            .text("EEC")
+            .attr("fill", "white");
+    
+    var XEC_text = svg.append("text")
+            .attr("x", tx+40)
+            .attr("y", ty - radius*1-2)
+            .attr("font-size", "0.66em")
+            .text("XEC")
+            .attr("fill", "white");
+}
+
 
 function getColor(d) {
 	if(d === "surprise") { return "#33a9c5"; }

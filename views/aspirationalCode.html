@@ -196,14 +196,19 @@ var data2 = [
 	"selected": {{ emotion.second.fear }}
 }];
 
+var radius = width*0.38;
+var tx = (width + margin.left + margin.right)/2;
+var ty = (height + margin.top + margin.bottom)/2 - 20;
+
+guideCircle();
 makeRadial();
 
 function makeRadial() {
 	console.log("makeRadial function");
 
-	var radius = width*0.38;
-	var tx = (width + margin.left + margin.right)/2;
-	var ty = (height + margin.top + margin.bottom)/2 - 20;
+	// var radius = width*0.38;
+	// var tx = (width + margin.left + margin.right)/2;
+	// var ty = (height + margin.top + margin.bottom)/2 - 20;
 
 	var firstRadial = svg.selectAll(".radial")
 							.data(data)
@@ -249,13 +254,13 @@ function makeRadial() {
 						.attr("transform", "translate("+tx+","+ty+")");
 
 	secondRadial.attr("x1", function(d, i) { 
-			return Math.cos(i * th + th/6) * radius; })
+			return Math.cos(i * th + th/5) * radius; })
 		.attr("y1", function(d, i) {
-			return Math.sin(i * th + th/6) * radius; })
+			return Math.sin(i * th + th/5) * radius; })
 		.attr("x2", function(d, i) {
-			return Math.cos(i * th + th/6) * radius*0.06; })
+			return Math.cos(i * th + th/5) * radius*0.06; })
 		.attr("y2", function(d, i) {
-			return Math.sin(i * th + th/6) * radius*0.06; })
+			return Math.sin(i * th + th/5) * radius*0.06; })
 		.attr("stroke-width", 3)
 		.attr("stroke", function(d) {
 			if(d.selected === 1) {
@@ -277,6 +282,40 @@ function makeRadial() {
           d3.select(this).style("stroke-width", 3);
           tooltip.style("visibility", "hidden"); 
       	});
+}
+
+function guideCircle() {
+	var EEC = svg.append("circle")
+		.attr("cx", tx )
+		.attr("cy", ty )
+		.attr("r", radius*0.5 )
+		.style("fill", "none")
+		.style("stroke-dasharray", ("1, 4"))
+		.attr("stroke-width", 1)
+		.attr("stroke", "rgb(140,140,140)");
+
+	var XEC = svg.append("circle")
+		.attr("cx", tx )
+		.attr("cy", ty )
+		.attr("r", radius*1 )
+		.style("fill", "none")
+		.style("stroke-dasharray", ("1, 4"))
+		.attr("stroke-width", 1)
+		.attr("stroke", "rgb(140,140,140)");
+    
+    var EEC_text = svg.append("text")
+            .attr("x", tx+ 30)
+            .attr("y", ty - radius*0.5-2)
+            .attr("font-size", "0.66em")
+            .text("EEC")
+            .attr("fill", "white");
+    
+    var XEC_text = svg.append("text")
+            .attr("x", tx+40)
+            .attr("y", ty - radius*1-2)
+            .attr("font-size", "0.66em")
+            .text("XEC")
+            .attr("fill", "white");
 }
 
 function getColor(d) {
