@@ -55,7 +55,9 @@
 	</div>
 </div>
 
-
+<div style="position:relative; padding:30px; color:grey; font-size:0.8em; text-align:center; top: 60px;">
+	BY <a href="http://www.youjinshin.com/" style="color:grey; ">YOUJIN SHIN</a>
+</div>
 
 <script>
 var width = parseInt(d3.select('#firstEG').style('width'), 10),
@@ -143,10 +145,11 @@ var data = [
 var radius = width*0.38;
 var tx = (width + margin.left + margin.right)/2;
 var ty = (height + margin.top + margin.bottom)/2 - 20;
+var th = 2*Math.PI / 14; 
 
 
-guideCircle();
 makeRadial();
+guideCircle();
 
 function makeRadial() {
 	console.log("makeRadial function");
@@ -215,15 +218,15 @@ function guideCircle() {
 		.attr("stroke", "rgb(140,140,140)");
     
     var EEC_text = svg.append("text")
-            .attr("x", tx+ 30)
-            .attr("y", ty - radius*0.5-2)
+            .attr("x", tx + radius*0.5*Math.cos(th*2)+2)
+            .attr("y", ty - radius*0.5*Math.sin(th*2)-2)
             .attr("font-size", "0.66em")
             .text("EEC")
             .attr("fill", "white");
     
     var XEC_text = svg.append("text")
-            .attr("x", tx+40)
-            .attr("y", ty - radius*1-2)
+            .attr("x", tx + radius*Math.cos(th*2)+2)
+            .attr("y", ty - radius*Math.sin(th*2)-2)
             .attr("font-size", "0.66em")
             .text("XEC")
             .attr("fill", "white");
