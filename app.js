@@ -69,6 +69,7 @@ app.get('/aspirationalCode/:emotion_id', routes.aspirationalCode);
 app.get('/view', routes.view);
 app.get('/allEmotion', routes.allEmotion);
 
+app.get('/about', routes.about);
 
 // //new astronaut routes
 // app.get('/create',routes.astroForm); //display form

@@ -265,6 +265,11 @@ exports.allEmotion = function(req, res) {
 	});
 }
 
+exports.about = function(req, res) {
+	console.log("about page requested");
+	res.render('about.html');
+}
+
 
 // /*
 // 	GET /
