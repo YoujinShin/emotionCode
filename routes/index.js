@@ -270,6 +270,11 @@ exports.about = function(req, res) {
 	res.render('about.html');
 }
 
+exports.statEmotion = function(req, res) {
+	console.log("statEmotion page requested");
+	res.render('statEmotion.html');
+}
+
 
 // /*
 // 	GET /

@@ -70,6 +70,7 @@ app.get('/view', routes.view);
 app.get('/allEmotion', routes.allEmotion);
 
 app.get('/about', routes.about);
+app.get('/statEmotion', routes.statEmotion);
 
 // //new astronaut routes
 // app.get('/create',routes.astroForm); //display form
