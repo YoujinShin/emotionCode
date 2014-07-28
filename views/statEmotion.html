@@ -1,29 +1,270 @@
+<style>
+	body {
+		background-color: black;
+	}
+	.dot {
+      stroke: none;
+    }
+</style>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
 
 <script>
 
-var width = 1000,
-	height = 600;
+var width = 1400,
+	height = 1100;
 
-var margin = { top: 20, right:20, bottom:30, left:20};
+var margin = { top:30, right:10, bottom:10, left:10};
 
 width = width - margin.left - margin.right,
 height = height - margin.top - margin.bottom;
+
+// var radius = width*0.38;
+var radius = 58;
+var tx = radius/2;
+// var tx = (width + margin.left + margin.right)/2;
+var ty = tx + 80;
+// var ty = (height + margin.top + margin.bottom)/2 - 20;
+var th = 2*Math.PI / 14; 
 
 var svg = d3.select("body").append("svg")
 			.attr("width", width)
 			.attr("height", height);
 
-loadEmotionData();
+var tooltip = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("padding", "8px")
+	.style("color", "white")
+	// .style("background-color", "rgba(0,0,0,0.6)")
+	.style("visibility", "hidden");
 
-function loadEmotionData() {
-	$.getJSON('/allEmotion', function(temp_data) {
-		var data = temp_data.quality;
-		
-		console.log(data);
-	})
+queue()
+  .defer(d3.json, '/allEmotion')
+  // .defer(d3.tsv, "obesity_data.tsv", function(d) {
+  //   if(d.state === selectedState) {
+  //     rateByState.set(d.year, +d.rate);
+  //   }
+  // })
+  .await(getEmotions);
+
+function getEmotions(error, emotions) {
+	var data = emotions.quality;
+
+	var t = 0;
+
+	data.forEach(function(d) {
+		if(d.state === "aspirational") {
+			// console.log(d.name);
+			// if(t == 0) { makeRadial(d, t); }
+			makeRadial(d, t);
+			t = t + 1;
+		}
+	});
+}
+
+function makeRadial(temp_data, t) {
+	// console.log(temp_data.first.surprise);
+
+	var data = [
+	{	
+		"emotion": "surprise",
+		"selected": temp_data.first.surprise
+	}, {
+		"emotion": "disapproval",
+		"selected":  temp_data.first.disapproval
+	}, {
+		"emotion": "sadness",
+		"selected": temp_data.first.sadness
+	}, {
+		"emotion": "remorse",
+		"selected": temp_data.first.remorse
+	}, {
+		"emotion": "disgust",
+		"selected": temp_data.first.disgust
+	}, {
+		"emotion": "contempt",
+		"selected": temp_data.first.contempt
+	}, {
+		"emotion": "anger",
+		"selected": temp_data.first.anger
+	}, {
+		"emotion": "aggressiveness",
+		"selected": temp_data.first.aggressiveness
+	}, {
+		"emotion": "interest",
+		"selected": temp_data.first.interest
+	}, {
+		"emotion": "optimism",
+		"selected": temp_data.first.optimism
+	}, {
+		"emotion": "joy",
+		"selected": temp_data.first.joy
+	}, {
+		"emotion": "love",
+		"selected": temp_data.first.love
+	}, {
+		"emotion": "trust",
+		"selected": temp_data.first.trust
+	}, {
+		"emotion": "submission",
+		"selected": temp_data.first.submission
+	}, {
+		"emotion": "fear",
+		"selected": temp_data.first.fear
+	}];
+	// console.log(data);
+
+	var data2 = [
+	{	
+		"emotion": "surprise",
+		"selected": temp_data.second.surprise
+	}, {
+		"emotion": "disapproval",
+		"selected": temp_data.second.disapproval
+	}, {
+		"emotion": "sadness",
+		"selected": temp_data.second.sadness
+	}, {
+		"emotion": "remorse",
+		"selected": temp_data.second.remorse
+	}, {
+		"emotion": "disgust",
+		"selected": temp_data.second.disgust
+	}, {
+		"emotion": "contempt",
+		"selected": temp_data.second.contempt
+	}, {
+		"emotion": "anger",
+		"selected": temp_data.second.anger
+	}, {
+		"emotion": "aggressiveness",
+		"selected": temp_data.second.aggressiveness
+	}, {
+		"emotion": "interest",
+		"selected": temp_data.second.interest
+	}, {
+		"emotion": "optimism",
+		"selected": temp_data.second.optimism
+	}, {
+		"emotion": "joy",
+		"selected": temp_data.second.joy
+	}, {
+		"emotion": "love",
+		"selected": temp_data.second.love
+	}, {
+		"emotion": "trust",
+		"selected": temp_data.second.trust
+	}, {
+		"emotion": "submission",
+		"selected": temp_data.second.submission
+	}, {
+		"emotion": "fear",
+		"selected": temp_data.second.fear
+	}];
+	tx = tx + 200;
+	
+	if(t == 6 || t == 12 || t == 18 || t == 24) {
+		ty = ty + 200;
+		tx = radius/2 + 200;
+	}
+	console.log(ty);
+
+	var firstRadial = svg.selectAll(".radial")
+							.data(data)
+						.enter().append("line")
+						.attr("transform", "translate("+tx+","+ty+")");
+
+	firstRadial.attr("x1", function(d, i) { 
+			return Math.cos(i * th) * radius*0.5; })
+		.attr("y1", function(d, i) {
+			return Math.sin(i * th) * radius*0.5; })
+		.attr("x2", function(d, i) {
+			return Math.cos(i * th) * radius*0.06; })
+		.attr("y2", function(d, i) {
+			return Math.sin(i * th) * radius*0.06; })
+		.attr("stroke-width", 2)
+		.attr("stroke", function(d) {
+			// console.log(d.selected);
+
+			if(d.selected == 1) {
+				// console.log("yes");
+				// console.log(getColor(d.emotion));
+				return getColor(d.emotion);
+			} else {
+				return "rgba(235,235,235, 0.2)";
+			}
+		})
+		.on("mouseover", function(d){
+          tooltip.text(d.emotion );
+          d3.select(this).style("stroke-width", 10);
+          tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){
+          tooltip.style("top", (event.pageY-10)+"px")
+          		 .style("left",(event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+          d3.select(this).style("stroke-width", 2);
+          tooltip.style("visibility", "hidden"); 
+      	});
+
+
+    var secondRadial = svg.selectAll(".radial")
+							.data(data2)
+						.enter().append("line")
+						.attr("transform", "translate("+tx+","+ty+")");
+
+	secondRadial.attr("x1", function(d, i) { 
+			return Math.cos(i * th + th/2) * radius; })
+		.attr("y1", function(d, i) {
+			return Math.sin(i * th + th/2) * radius; })
+		.attr("x2", function(d, i) {
+			return Math.cos(i * th + th/2) * radius*0.06; })
+		.attr("y2", function(d, i) {
+			return Math.sin(i * th + th/2) * radius*0.06; })
+		.attr("stroke-width", 2)
+		.attr("stroke", function(d) {
+			if(d.selected == 1) {
+				return getColor(d.emotion);
+			} else {
+				return "rgba(235,235,235, 0.2)";
+			}
+		})
+		.on("mouseover", function(d){
+          tooltip.text(d.emotion );
+          d3.select(this).style("stroke-width", 10);
+          tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){
+          tooltip.style("top", (event.pageY-10)+"px")
+          		 .style("left",(event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+          d3.select(this).style("stroke-width", 2);
+          tooltip.style("visibility", "hidden"); 
+      	});
+}
+
+function getColor(d) {
+	if(d === "surprise") { return "#33a9c5"; }
+	else if(d === "disapproval") { return "#6c77b9"; } 
+	else if(d === "sadness") { return "#4956a5"; } 
+	else if(d === "remorse") { return "#8d73b4"; } 
+	else if(d === "disgust") { return "#8d418b"; } 
+	else if(d === "contempt") { return "#e9746d"; } 
+	else if(d === "anger") { return "#df4342"; } 
+	else if(d === "aggressiveness") { return "#ea8b5b"; }
+	else if(d === "interest") { return "#de8131"; } 
+	else if(d === "optimism") { return "#e5d953"; } 
+	else if(d === "joy") { return "#c7c638"; } 
+	else if(d === "love") { return "#a6c160"; } 
+	else if(d === "trust") { return "#73b049"; } 
+	else if(d === "submission") { return "#7cc37d"; } 
+	else if(d === "fear") { return "#2eb69d"; }
 }
 
 </script>
