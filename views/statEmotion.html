@@ -14,20 +14,51 @@
 <script>
 
 var width = 1400,
-	height = 1100;
+	height = 1600;
 
-var margin = { top:30, right:10, bottom:10, left:10};
+var margin = { top:340, right:10, bottom:10, left:10};
 
 width = width - margin.left - margin.right,
 height = height - margin.top - margin.bottom;
 
-// var radius = width*0.38;
-var radius = 58;
+var radius = 40;
 var tx = radius/2;
 // var tx = (width + margin.left + margin.right)/2;
-var ty = tx + 80;
+var ty = tx + margin.top;
 // var ty = (height + margin.top + margin.bottom)/2 - 20;
 var th = 2*Math.PI / 14; 
+
+var f_num_surprise = 0;
+var f_num_disapproval = 0;
+var f_num_sadness = 0;
+var f_num_remorse = 0;
+var f_num_disgust = 0;
+var f_num_contempt = 0;
+var f_num_anger = 0;
+var f_num_aggressiveness = 0;
+var f_num_interest = 0;
+var f_num_optimism = 0;
+var f_num_joy = 0;
+var f_num_love = 0;
+var f_num_trust = 0;
+var f_num_submission = 0;
+var f_num_fear = 0;
+
+var s_num_surprise = 0;
+var s_num_disapproval = 0;
+var s_num_sadness = 0;
+var s_num_remorse = 0;
+var s_num_disgust = 0;
+var s_num_contempt = 0;
+var s_num_anger = 0;
+var s_num_aggressiveness = 0;
+var s_num_interest = 0;
+var s_num_optimism = 0;
+var s_num_joy = 0;
+var s_num_love = 0;
+var s_num_trust = 0;
+var s_num_submission = 0;
+var s_num_fear = 0;
 
 var svg = d3.select("body").append("svg")
 			.attr("width", width)
@@ -39,7 +70,6 @@ var tooltip = d3.select("body")
 	.style("z-index", "10")
 	.style("padding", "8px")
 	.style("color", "white")
-	// .style("background-color", "rgba(0,0,0,0.6)")
 	.style("visibility", "hidden");
 
 queue()
@@ -58,8 +88,6 @@ function getEmotions(error, emotions) {
 
 	data.forEach(function(d) {
 		if(d.state === "aspirational") {
-			// console.log(d.name);
-			// if(t == 0) { makeRadial(d, t); }
 			makeRadial(d, t);
 			t = t + 1;
 		}
@@ -67,8 +95,6 @@ function getEmotions(error, emotions) {
 }
 
 function makeRadial(temp_data, t) {
-	// console.log(temp_data.first.surprise);
-
 	var data = [
 	{	
 		"emotion": "surprise",
@@ -165,13 +191,12 @@ function makeRadial(temp_data, t) {
 		"emotion": "fear",
 		"selected": temp_data.second.fear
 	}];
-	tx = tx + 200;
+	tx = tx + 190;
 	
 	if(t == 6 || t == 12 || t == 18 || t == 24) {
-		ty = ty + 200;
-		tx = radius/2 + 200;
+		ty = ty + 160;
+		tx = radius/2 + 190;
 	}
-	console.log(ty);
 
 	var firstRadial = svg.selectAll(".radial")
 							.data(data)
@@ -186,13 +211,9 @@ function makeRadial(temp_data, t) {
 			return Math.cos(i * th) * radius*0.06; })
 		.attr("y2", function(d, i) {
 			return Math.sin(i * th) * radius*0.06; })
-		.attr("stroke-width", 2)
+		.attr("stroke-width", 1.5)
 		.attr("stroke", function(d) {
-			// console.log(d.selected);
-
 			if(d.selected == 1) {
-				// console.log("yes");
-				// console.log(getColor(d.emotion));
 				return getColor(d.emotion);
 			} else {
 				return "rgba(235,235,235, 0.2)";
@@ -208,7 +229,7 @@ function makeRadial(temp_data, t) {
           		 .style("left",(event.pageX+10)+"px");
         })
         .on("mouseout", function(){
-          d3.select(this).style("stroke-width", 2);
+          d3.select(this).style("stroke-width", 1.5);
           tooltip.style("visibility", "hidden"); 
       	});
 
@@ -226,7 +247,7 @@ function makeRadial(temp_data, t) {
 			return Math.cos(i * th + th/2) * radius*0.06; })
 		.attr("y2", function(d, i) {
 			return Math.sin(i * th + th/2) * radius*0.06; })
-		.attr("stroke-width", 2)
+		.attr("stroke-width", 1.5)
 		.attr("stroke", function(d) {
 			if(d.selected == 1) {
 				return getColor(d.emotion);
@@ -244,27 +265,280 @@ function makeRadial(temp_data, t) {
           		 .style("left",(event.pageX+10)+"px");
         })
         .on("mouseout", function(){
-          d3.select(this).style("stroke-width", 2);
+          d3.select(this).style("stroke-width", 1.5);
           tooltip.style("visibility", "hidden"); 
       	});
+
+    makeStat();
+
+    f_num_surprise = f_num_surprise + parseInt(temp_data.first.surprise);
+    f_num_disapproval = f_num_disapproval + parseInt(temp_data.first.disapproval);
+    f_num_sadness = f_num_sadness + parseInt(temp_data.first.sadness);
+    f_num_remorse = f_num_remorse + parseInt(temp_data.first.remorse);
+    f_num_disgust = f_num_disgust + parseInt(temp_data.first.disgust);
+    f_num_contempt = f_num_contempt + parseInt(temp_data.first.contempt);
+    f_num_anger = f_num_anger + parseInt(temp_data.first.anger);
+    f_num_aggressiveness = f_num_aggressiveness + parseInt(temp_data.first.aggressiveness);
+    f_num_interest = f_num_interest + parseInt(temp_data.first.interest);
+    f_num_optimism = f_num_optimism + parseInt(temp_data.first.optimism);
+    f_num_joy = f_num_joy + parseInt(temp_data.first.joy);
+    f_num_love = f_num_love + parseInt(temp_data.first.love);
+    f_num_trust = f_num_trust + parseInt(temp_data.first.trust);
+    f_num_submission = f_num_submission + parseInt(temp_data.first.submission);
+    f_num_fear = f_num_fear + parseInt(temp_data.first.fear);
+
+    s_num_surprise = s_num_surprise + parseInt(temp_data.second.surprise);
+    s_num_disapproval = s_num_disapproval + parseInt(temp_data.second.disapproval);
+    s_num_sadness = s_num_sadness + parseInt(temp_data.second.sadness);
+    s_num_remorse = s_num_remorse + parseInt(temp_data.second.remorse);
+    s_num_disgust = s_num_disgust + parseInt(temp_data.second.disgust);
+    s_num_contempt = s_num_contempt + parseInt(temp_data.second.contempt);
+    s_num_anger = s_num_anger + parseInt(temp_data.second.anger);
+    s_num_aggressiveness = s_num_aggressiveness + parseInt(temp_data.second.aggressiveness);
+    s_num_interest = s_num_interest + parseInt(temp_data.second.interest);
+    s_num_optimism = s_num_optimism + parseInt(temp_data.second.optimism);
+    s_num_joy = s_num_joy + parseInt(temp_data.second.joy);
+    s_num_love = s_num_love + parseInt(temp_data.second.love);
+    s_num_trust = s_num_trust + parseInt(temp_data.second.trust);
+    s_num_submission = s_num_submission + parseInt(temp_data.second.submission);
+    s_num_fear = s_num_fear + parseInt(temp_data.second.fear);
+    // console.log(f_num_disapproval);
 }
 
 function getColor(d) {
-	if(d === "surprise") { return "#33a9c5"; }
+	if(d === "surprise") {  return "#33a9c5";  }
 	else if(d === "disapproval") { return "#6c77b9"; } 
-	else if(d === "sadness") { return "#4956a5"; } 
-	else if(d === "remorse") { return "#8d73b4"; } 
-	else if(d === "disgust") { return "#8d418b"; } 
+	else if(d === "sadness") {  return "#4956a5";  } 
+	else if(d === "remorse") {  return "#8d73b4"; } 
+	else if(d === "disgust") {  return "#8d418b";  } 
 	else if(d === "contempt") { return "#e9746d"; } 
-	else if(d === "anger") { return "#df4342"; } 
-	else if(d === "aggressiveness") { return "#ea8b5b"; }
-	else if(d === "interest") { return "#de8131"; } 
-	else if(d === "optimism") { return "#e5d953"; } 
-	else if(d === "joy") { return "#c7c638"; } 
-	else if(d === "love") { return "#a6c160"; } 
-	else if(d === "trust") { return "#73b049"; } 
-	else if(d === "submission") { return "#7cc37d"; } 
-	else if(d === "fear") { return "#2eb69d"; }
+	else if(d === "anger") {  return "#df4342";  } 
+	else if(d === "aggressiveness") {  return "#ea8b5b";  }
+	else if(d === "interest") {  return "#de8131";  } 
+	else if(d === "optimism") {  return "#e5d953";  } 
+	else if(d === "joy") {  return "#c7c638";  } 
+	else if(d === "love") {  return "#a6c160";  } 
+	else if(d === "trust") {  return "#73b049";  } 
+	else if(d === "submission") {  return "#7cc37d";  } 
+	else if(d === "fear") {  return "#2eb69d"; }
+}
+
+function makeStat() {
+	var mult = 16;
+	var gap = 60;
+	var h = 7;
+	var hgap = 15;
+
+	var f_rect_surprise = svg.append("rect")
+    						.attr("x",width/2 - f_num_surprise*mult - gap)
+    						.attr("y",hgap*1)
+    						.attr("width", f_num_surprise*mult)
+    						.attr("height", h)
+    						.style("fill", "#33a9c5");
+
+    var f_rect_dispproval = svg.append("rect")
+    						.attr("x",width/2 - f_num_disapproval*mult- gap)
+    						.attr("y",hgap*2)
+    						.attr("width", f_num_disapproval*mult)
+    						.attr("height", h)
+    						.style("fill", "#6c77b9");
+
+    var f_rect_sadness = svg.append("rect")
+    						.attr("x",width/2 - f_num_sadness*mult- gap)
+    						.attr("y",hgap*3)
+    						.attr("width", f_num_sadness*mult)
+    						.attr("height", h)
+    						.style("fill", "#4956a5");
+
+    var f_rect_remorse = svg.append("rect")
+    						.attr("x",width/2 - f_num_remorse*mult- gap)
+    						.attr("y",hgap*4)
+    						.attr("width", f_num_remorse*mult)
+    						.attr("height", h)
+    						.style("fill", "#8d73b4");
+
+    var f_rect_disgust = svg.append("rect")
+    						.attr("x",width/2 - f_num_disgust*mult- gap)
+    						.attr("y",hgap*5)
+    						.attr("width", f_num_disgust*mult)
+    						.attr("height", h)
+    						.style("fill", "#8d418b");
+
+    var f_rect_contempt = svg.append("rect")
+    						.attr("x",width/2 - f_num_contempt*mult- gap)
+    						.attr("y",hgap*6)
+    						.attr("width", f_num_contempt*mult)
+    						.attr("height", h)
+    						.style("fill", "#e9746d");
+
+    var f_rect_anger = svg.append("rect")
+    						.attr("x",width/2 - f_num_anger*mult- gap)
+    						.attr("y",hgap*7)
+    						.attr("width", f_num_anger*mult)
+    						.attr("height", h)
+    						.style("fill", "#df4342");
+
+    var f_rect_aggressiveness = svg.append("rect")
+    						.attr("x",width/2 - f_num_aggressiveness*mult- gap)
+    						.attr("y",hgap*8)
+    						.attr("width", f_num_aggressiveness*mult)
+    						.attr("height", h)
+    						.style("fill", "#ea8b5b");
+
+    var f_rect_interest = svg.append("rect")
+    						.attr("x",width/2 - f_num_interest*mult- gap)
+    						.attr("y",hgap*9)
+    						.attr("width", f_num_interest*mult)
+    						.attr("height", h)
+    						.style("fill", "#de8131");
+
+    var f_rect_optimism = svg.append("rect")
+    						.attr("x",width/2 - f_num_optimism*mult- gap)
+    						.attr("y",hgap*10)
+    						.attr("width", f_num_optimism*mult)
+    						.attr("height", h)
+    						.style("fill", "#e5d953");
+
+    var f_rect_joy = svg.append("rect")
+    						.attr("x",width/2 - f_num_joy*mult- gap)
+    						.attr("y",hgap*11)
+    						.attr("width", f_num_joy*mult)
+    						.attr("height", h)
+    						.style("fill", "#c7c638");
+
+    var f_rect_love = svg.append("rect")
+    						.attr("x",width/2 - f_num_love*mult- gap)
+    						.attr("y",hgap*12)
+    						.attr("width", f_num_love*mult)
+    						.attr("height", h)
+    						.style("fill", "#a6c160");
+
+    var f_rect_trust = svg.append("rect")
+    						.attr("x",width/2 - f_num_trust*mult- gap)
+    						.attr("y",hgap*13)
+    						.attr("width", f_num_trust*mult)
+    						.attr("height", h)
+    						.style("fill", "#73b049");
+
+    var f_rect_submission = svg.append("rect")
+    						.attr("x",width/2 - f_num_submission*mult- gap)
+    						.attr("y",hgap*14)
+    						.attr("width", f_num_submission*mult)
+    						.attr("height", h)
+    						.style("fill", "#7cc37d");
+
+    var f_rect_fear = svg.append("rect")
+    						.attr("x",width/2 - f_num_fear *mult- gap)
+    						.attr("y",hgap*15)
+    						.attr("width", f_num_fear *mult)
+    						.attr("height", h)
+    						.style("fill", "#2eb69d");
+    //////////////////////////////////////////////////
+
+    var s_rect_surprise = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*1)
+    						.attr("width", s_num_surprise*mult)
+    						.attr("height", h)
+    						.style("fill", "#33a9c5");
+
+    var s_rect_dispproval = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*2)
+    						.attr("width", s_num_disapproval*mult)
+    						.attr("height", h)
+    						.style("fill", "#6c77b9");
+
+    var s_rect_sadness = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*3)
+    						.attr("width", s_num_sadness*mult)
+    						.attr("height", h)
+    						.style("fill", "#4956a5");
+
+    var s_rect_remorse = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*4)
+    						.attr("width", s_num_remorse*mult)
+    						.attr("height", h)
+    						.style("fill", "#8d73b4");
+
+    var s_rect_disgust = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*5)
+    						.attr("width", s_num_disgust*mult)
+    						.attr("height", h)
+    						.style("fill", "#8d418b");
+
+    var s_rect_contempt = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*6)
+    						.attr("width", s_num_contempt*mult)
+    						.attr("height", h)
+    						.style("fill", "#e9746d");
+
+    var s_rect_anger = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*7)
+    						.attr("width", s_num_anger*mult)
+    						.attr("height", h)
+    						.style("fill", "#df4342");
+
+    var s_rect_aggressiveness = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*8)
+    						.attr("width", s_num_aggressiveness*mult)
+    						.attr("height", h)
+    						.style("fill", "#ea8b5b");
+
+    var s_rect_interest = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*9)
+    						.attr("width", s_num_interest*mult)
+    						.attr("height", h)
+    						.style("fill", "#de8131");
+
+    var s_rect_optimism = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*10)
+    						.attr("width", s_num_optimism*mult)
+    						.attr("height", h)
+    						.style("fill", "#e5d953");
+
+    var s_rect_joy = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*11)
+    						.attr("width", s_num_joy*mult)
+    						.attr("height", h)
+    						.style("fill", "#c7c638");
+
+    var s_rect_love = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*12)
+    						.attr("width", s_num_love*mult)
+    						.attr("height", h)
+    						.style("fill", "#a6c160");
+
+    var s_rect_trust = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*13)
+    						.attr("width", s_num_trust*mult)
+    						.attr("height", h)
+    						.style("fill", "#73b049");
+
+    var s_rect_submission = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*14)
+    						.attr("width", s_num_submission*mult)
+    						.attr("height", h)
+    						.style("fill", "#7cc37d");
+
+    var s_rect_fear = svg.append("rect")
+    						.attr("x",width/2 + gap)
+    						.attr("y",hgap*15)
+    						.attr("width", s_num_fear *mult)
+    						.attr("height", h)
+    						.style("fill", "#2eb69d");
 }
 
 </script>
